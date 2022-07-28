@@ -21,10 +21,10 @@
             <div class="content" id="signIn">
                 <h1 style="padding-bottom: 35px">Sign In</h1>
                 <div class="input-field"><input type="text" id="usrName" name="usrName" placeholder="Email"
-                                                class="validate">
+                                                class="validate" value="${userName}">
                 </div>
                 <div class="input-field"><input type="password" id="psw" name="psw" placeholder="Password"
-                                                class="validate">
+                                                class="validate" value="${password}">
                 </div>
                 <p style="color: red; margin: 0">${failMassage}</p>
                 <div class="button">

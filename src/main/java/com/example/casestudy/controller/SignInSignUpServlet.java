@@ -48,6 +48,8 @@ public class SignInSignUpServlet extends HttpServlet {
         } else {
             String failMassage = "Username or password is incorrect!";
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
+            request.setAttribute("userName",userName);
+            request.setAttribute("password",password);
             request.setAttribute("failMassage", failMassage);
             requestDispatcher.forward(request,response);
         }

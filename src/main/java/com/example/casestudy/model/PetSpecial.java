@@ -2,13 +2,18 @@ package com.example.casestudy.model;
 
 public class PetSpecial {
     private int id;
-    private String name;
+    private String specialName;
 
     public PetSpecial() {
     }
 
-    public PetSpecial(String name) {
-        this.name = name;
+    public PetSpecial(String specialName) {
+        this.specialName = specialName;
+    }
+
+    public PetSpecial(int id, String specialName) {
+        this.id = id;
+        this.specialName = specialName;
     }
 
     public int getId() {
@@ -20,10 +25,10 @@ public class PetSpecial {
     }
 
     public String getName() {
-        return name;
+        return specialName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.specialName = name;
     }
 }
