@@ -53,14 +53,4 @@ public class Service {
     public void setServiceDay(int serviceDay) {
         this.serviceDay = serviceDay;
     }
-
-    @Override
-    public String toString() {
-        return "Service{" +
-                "id=" + id +
-                ", serviceName='" + serviceName + '\'' +
-                ", price=" + price +
-                ", serviceDay=" + serviceDay +
-                '}';
-    }
 }

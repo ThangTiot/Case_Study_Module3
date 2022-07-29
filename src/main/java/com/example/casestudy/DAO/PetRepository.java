@@ -17,6 +17,8 @@ public class PetRepository implements CRUDRepository<Pet>{
     private final String SELECT_ALL_PET = "select * from pet";
     private final String CREATE_PET = "insert into pet(petName, age, price, petSpecialId, image, petStatus) values (?,?,?,?,?,?)";
     private final String DELETE_PET_BY_ID = "delete from pet where id = ?";
+    private final String UPDATE_PET_BT_ID = "update pet set petName = ? , age = ? , price = ? , petSpecialId = ? , " +
+            "image = ? , petStatus = ? where id = ?";
 
     @Override
     public ArrayList<Pet> findAll() {
@@ -66,6 +68,23 @@ public class PetRepository implements CRUDRepository<Pet>{
             Connection connection = myConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PET_BY_ID);
             preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void update(Pet pet) {
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PET_BT_ID);
+            preparedStatement.setString(1,pet.getName());
+            preparedStatement.setString(2,pet.getAge());
+            preparedStatement.setInt(3,pet.getPrice());
+            preparedStatement.setInt(4,pet.getspecial().getId());
+            preparedStatement.setString(5,pet.getImage());
+            preparedStatement.setString(6,pet.getStatus());
+            preparedStatement.setInt(7,pet.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
