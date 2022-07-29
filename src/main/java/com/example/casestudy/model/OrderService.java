@@ -11,10 +11,9 @@ public class OrderService {
     public OrderService() {
     }
 
-    public OrderService(Customer customer, Date dateCreateService, String status) {
+    public OrderService(Customer customer, Date dateCreateService) {
         this.customer = customer;
         this.dateCreateService = dateCreateService;
-        this.status = status;
     }
 
     public OrderService(int id, Customer customer, Date dateCreateService, String status) {
