@@ -1,22 +1,22 @@
 package com.example.casestudy.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class OrderService {
     private int id;
     private Customer customer;
-    private Date dateCreateService;
+    private LocalDate dateCreateService = LocalDate.now();
     private String status = "Chưa thanh toán";
 
     public OrderService() {
     }
 
-    public OrderService(Customer customer, Date dateCreateService) {
+    public OrderService(Customer customer) {
         this.customer = customer;
-        this.dateCreateService = dateCreateService;
     }
 
-    public OrderService(int id, Customer customer, Date dateCreateService, String status) {
+    public OrderService(int id, Customer customer, LocalDate dateCreateService, String status) {
         this.id = id;
         this.customer = customer;
         this.dateCreateService = dateCreateService;
@@ -39,11 +39,11 @@ public class OrderService {
         this.customer = customer;
     }
 
-    public Date getDateCreateService() {
+    public LocalDate getDateCreateService() {
         return dateCreateService;
     }
 
-    public void setDateCreateService(Date dateCreateService) {
+    public void setDateCreateService(LocalDate dateCreateService) {
         this.dateCreateService = dateCreateService;
     }
 
