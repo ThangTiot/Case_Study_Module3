@@ -38,7 +38,7 @@ public class CustomerRepository implements CRUDRepository<Customer>{
     }
 
     @Override
-    public void creat(Customer customer) {
+    public void create(Customer customer) {
         try {
             Connection connection = myConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_CUSTOMER);

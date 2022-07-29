@@ -10,7 +10,7 @@ public class CustomerManager implements CRUDService<Customer>{
 
     @Override
     public void create(Customer customer) {
-        customerRepository.creat(customer);
+        customerRepository.create(customer);
     }
 
     @Override
@@ -33,14 +33,14 @@ public class CustomerManager implements CRUDService<Customer>{
 
     }
 
-    public boolean checkCustomerExist(String userName, String pass) {
+    public Customer checkCustomerExist(String userName, String pass) {
         ArrayList<Customer> customers = findAll();
         for (Customer customer : customers) {
             if (customer.getUsername().equals(userName) && customer.getPass().equals(pass)) {
-                return true;
+                return customer;
             }
         }
-        return false;
+        return null;
     }
 
     public boolean checkUserNameExist(String userName) {

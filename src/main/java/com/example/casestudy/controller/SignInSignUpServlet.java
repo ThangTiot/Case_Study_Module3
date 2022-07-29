@@ -2,24 +2,36 @@ package com.example.casestudy.controller;
 
 import com.example.casestudy.Verified.VerifiedCustomer.VerifiedCustomer;
 import com.example.casestudy.model.Customer;
+import com.example.casestudy.model.Pet;
 import com.example.casestudy.service.CustomerManager;
+import com.example.casestudy.service.PetManager;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class SignInSignUpServlet extends HttpServlet {
     CustomerManager customerManager = new CustomerManager();
     VerifiedCustomer verifiedCustomer = new VerifiedCustomer();
+    PetManager petManager = new PetManager();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String messageSignUp = "signUp";
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
-        request.setAttribute("messageSignUp", messageSignUp);
-        requestDispatcher.forward(request,response);
+        String action = request.getParameter("action");
+        switch (action) {
+            case "signUp":
+                String messageSignUp = "signUp";
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
+                request.setAttribute("messageSignUp", messageSignUp);
+                requestDispatcher.forward(request,response);
+                break;
+            case "logOut":
+                response.sendRedirect("SignIN_SignUp.jsp");
+                break;
+        }
     }
 
     @Override
@@ -32,9 +44,6 @@ public class SignInSignUpServlet extends HttpServlet {
             case "signUp":
                 signUp(request, response);
                 break;
-            default:
-                response.sendRedirect("home.jsp");
-                break;
         }
     }
 
@@ -42,9 +51,10 @@ public class SignInSignUpServlet extends HttpServlet {
         String userName = request.getParameter("usrName");
         String password = request.getParameter("psw");
         if (userName.equals("admin") && password.equals("admin")) {
-            response.sendRedirect("home.jsp");
-        } else if (customerManager.checkCustomerExist(userName, password)) {
-            response.sendRedirect("homeCustomer.jsp");
+            displayAdmin(request,response);
+        } else if (customerManager.checkCustomerExist(userName, password) != null) {
+            Customer customer = customerManager.checkCustomerExist(userName, password);
+            displayCustomer(request,response,customer);
         } else {
             String failMassage = "Username or password is incorrect!";
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
@@ -92,7 +102,7 @@ public class SignInSignUpServlet extends HttpServlet {
         }
         if (check) {
             customerManager.create(customer);
-            response.sendRedirect("homeCustomer.jsp");
+            response.sendRedirect("SignIN_SignUp.jsp");
         } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
             request.setAttribute("c", customer);
@@ -101,5 +111,19 @@ public class SignInSignUpServlet extends HttpServlet {
             request.setAttribute("messageSignUp", messageSignUp);
             requestDispatcher.forward(request,response);
         }
+    }
+
+    public void displayAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<Pet> pets = petManager.findAll();
+        request.setAttribute("pets", pets);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
+        requestDispatcher.forward(request,response);
+    }
+    public void displayCustomer(HttpServletRequest request, HttpServletResponse response, Customer customer) throws ServletException, IOException {
+        ArrayList<Pet> pets = petManager.findAll();
+        request.setAttribute("pets", pets);
+        request.setAttribute("customer", customer);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("homeCustomer.jsp");
+        requestDispatcher.forward(request,response);
     }
 }

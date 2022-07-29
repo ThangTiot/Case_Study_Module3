@@ -9,7 +9,7 @@ public class PetSpecialManager implements CRUDService<PetSpecial>{
     PetSpecialRepository petSpecialRepository = new PetSpecialRepository();
     @Override
     public void create(PetSpecial petSpecial) {
-        petSpecialRepository.creat(petSpecial);
+        petSpecialRepository.create(petSpecial);
     }
 
     @Override

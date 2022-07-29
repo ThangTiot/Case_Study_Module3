@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: Dell
@@ -6,11 +7,71 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Update Pet</title>
 </head>
 <body>
-<h1>Update Pet</h1>
+<form action="/PetServlet?action=updatePetGet" class="form" enctype="multipart/form-data">
+    <h1> Edit Form </h1>
+    <div class="form-group">
+        <label class="control-label">Pet Name</label>
+        <div class="inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
+                <input name="pet-name" placeholder="Enter Pet name" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Pet Age</label>
+        <div class="inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
+                <input name="pet-age" placeholder="Enter Pet age" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Pet Price</label>
+        <div class="inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
+                <input name="pet-price" placeholder="Enter Pet price" class="form-control" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class=" control-label">Species</label>
+        <div class=" selectContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
+                <select name="species" class="form-control">
+                    <option value=" ">Please select your Pet Species</option>
+                    <c:forEach >
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Pet Image</label>
+        <div class="inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
+                <input name="pet-image" class="form-control" type="file">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label class=" control-label"></label>
+        <div class="bnt">
+            <button type="submit" class="btn" style="width: 150px;height: 30px">Send
+            </button>
+        </div>
+    </div>
+</form>
 </body>
 </html>

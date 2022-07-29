@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface CRUDRepository<E> {
     ArrayList<E> findAll();
-    void creat(E e);
+    void create(E e);
 
     void deleteById(int id);
 }

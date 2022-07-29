@@ -3,6 +3,7 @@ package com.example.casestudy.model;
 public class OrderDetail {
     private Pet pet;
     private Order order;
+    private int totalOrder;
 
     public OrderDetail() {
     }
@@ -26,5 +27,13 @@ public class OrderDetail {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public int getTotalOrder() {
+        return pet.getPrice();
+    }
+
+    public void setTotalOrder(int totalOrder) {
+        this.totalOrder = totalOrder;
     }
 }

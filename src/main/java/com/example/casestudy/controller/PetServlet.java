@@ -17,12 +17,13 @@ public class PetServlet extends HttpServlet {
     VerifiedPet verifiedPet = new VerifiedPet();
     PetSpecialManager petSpecialManager = new PetSpecialManager();
     PetManager petManager = new PetManager();
+    SignInSignUpServlet signInSignUpServlet = new SignInSignUpServlet();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
         switch (action) {
             case "createPetGet":
-                createPetGet(response);
+                createPetGet(request,response);
                 break;
             case "deletePetSpecialGet":
                 deletePetSpecialGet(request);
@@ -32,6 +33,9 @@ public class PetServlet extends HttpServlet {
                 break;
             case "deletePetGet":
                 deletePetGet(request);
+                break;
+            default:
+                signInSignUpServlet.displayAdmin(request,response);
                 break;
         }
 
@@ -53,8 +57,11 @@ public class PetServlet extends HttpServlet {
         }
     }
 
-    public void createPetGet(HttpServletResponse response) throws IOException {
-        response.sendRedirect("pet/createPet.jsp");
+    public void createPetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
+        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+        request.setAttribute("petSpecials", petSpecials);
+        requestDispatcher.forward(request, response);
     }
 
     public void createPetPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,15 +70,26 @@ public class PetServlet extends HttpServlet {
             String age = request.getParameter("age");
             int price = Integer.parseInt(request.getParameter("price"));
             int specialId = Integer.parseInt(request.getParameter("specialId"));
-            String image = request.getParameter("image");
+            Part part = (Part) request.getParts();
+            String image = getFileName(part);
             PetSpecial special = petSpecialManager.findById(specialId);
             Pet pet = new Pet(petName, age, price, special, image);
-            if (verifiedPet.verifiedAge(age)) {
-                petManager.create(pet);
-            } else {
+            boolean check = true;
+            if (petManager.checkPetNameExist(petName)) {
+                String petNameFailMessage = "Tên đã tồn tại!";
+                request.setAttribute("petNameFailMessage", petNameFailMessage);
+                check = false;
+            }
+            if (!verifiedPet.verifiedAge(age)) {
                 String ageFailMessage = "Tuổi không hợp lệ!";
                 request.setAttribute("ageFailMessage", ageFailMessage);
+            }
+            if (check) {
+                petManager.create(pet);
+                response.sendRedirect("/PetServlet?action=");
+            } else {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
+                request.setAttribute("p", pet);
                 requestDispatcher.forward(request, response);
             }
         } catch (Exception e) {
@@ -80,6 +98,16 @@ public class PetServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
             requestDispatcher.forward(request,response);
         }
+    }
+    private String getFileName(Part part) {
+        String content = part.getHeader("content-disposition");
+        String[] contents = content.split(";");
+        for (String s : contents) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() -1);
+            }
+        }
+        return "";
     }
 
     public void creatPetSpecialPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

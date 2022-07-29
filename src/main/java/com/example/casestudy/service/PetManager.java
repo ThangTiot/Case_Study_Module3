@@ -1,6 +1,7 @@
 package com.example.casestudy.service;
 
 import com.example.casestudy.DAO.PetRepository;
+import com.example.casestudy.model.Customer;
 import com.example.casestudy.model.Pet;
 import com.example.casestudy.model.PetSpecial;
 
@@ -10,7 +11,7 @@ public class PetManager implements CRUDService<Pet>{
     PetRepository petRepository = new PetRepository();
     @Override
     public void create(Pet pet) {
-        petRepository.creat(pet);
+        petRepository.create(pet);
     }
 
     @Override
@@ -37,5 +38,14 @@ public class PetManager implements CRUDService<Pet>{
     @Override
     public void deleteById(int id) {
         petRepository.deleteById(id);
+    }
+    public boolean checkPetNameExist(String petName) {
+        ArrayList<Pet> pets = findAll();
+        for (Pet pet : pets) {
+            if (pet.getName().equals(petName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

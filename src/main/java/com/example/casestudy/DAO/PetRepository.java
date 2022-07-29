@@ -46,7 +46,7 @@ public class PetRepository implements CRUDRepository<Pet>{
     }
 
     @Override
-    public void creat(Pet pet) {
+    public void create(Pet pet) {
         try {
             Connection connection = myConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_PET);
