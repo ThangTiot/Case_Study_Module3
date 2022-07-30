@@ -13,14 +13,14 @@
     <title>Update Pet</title>
 </head>
 <body>
-<form action="/PetServlet?action=updatePetGet" class="form" enctype="multipart/form-data">
+<form action="/PetServlet?action=updatePetGet" class="form" method="post">
     <h1> Edit Form </h1>
     <div class="form-group">
         <label class="control-label">Pet Name</label>
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
-                <input name="pet-name" placeholder="Enter Pet name" class="form-control" type="text">
+                <input name="petName" placeholder="Enter Pet name" class="form-control" type="text" value="${p.getName()}">
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
-                <input name="pet-age" placeholder="Enter Pet age" class="form-control" type="text">
+                <input name="age" placeholder="Enter Pet age" class="form-control" type="text" value="${p.getAge()}">
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
-                <input name="pet-price" placeholder="Enter Pet price" class="form-control" type="text">
+                <input name="price" placeholder="Enter Pet price" class="form-control" type="text" value="${p.getPrice()}">
             </div>
         </div>
     </div>
@@ -47,9 +47,11 @@
         <div class=" selectContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
-                <select name="species" class="form-control">
+                <select name="specialId" class="form-control">
                     <option value=" ">Please select your Pet Species</option>
-                    <c:forEach >
+                    <c:forEach items="${petSpecials}" var="s">
+                        <option value="${s.getId()}">${s.getName()}</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -60,7 +62,7 @@
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
-                <input name="pet-image" class="form-control" type="file">
+                <input name="image" class="form-control" type="file">
             </div>
         </div>
     </div>

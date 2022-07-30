@@ -1,6 +1,7 @@
 package com.example.casestudy.service;
 
 import com.example.casestudy.DAO.PetSpecialRepository;
+import com.example.casestudy.model.Pet;
 import com.example.casestudy.model.PetSpecial;
 
 import java.util.ArrayList;
@@ -35,5 +36,14 @@ public class PetSpecialManager implements CRUDService<PetSpecial>{
     @Override
     public void deleteById(int id) {
         petSpecialRepository.deleteById(id);
+    }
+    public boolean checkSpecialNameExist(String special) {
+        ArrayList<PetSpecial> specials = findAll();
+        for (PetSpecial s : specials) {
+            if (s.getName().equals(special)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

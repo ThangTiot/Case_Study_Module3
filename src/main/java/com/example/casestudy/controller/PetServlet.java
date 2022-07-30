@@ -25,14 +25,16 @@ public class PetServlet extends HttpServlet {
             case "createPetGet":
                 createPetGet(request,response);
                 break;
-            case "deletePetSpecialGet":
-                deletePetSpecialGet(request);
-                break;
             case "updatePetGet":
                 updatePetGet(request,response);
                 break;
             case "deletePetGet":
                 deletePetGet(request);
+                break;
+            case "creatPetSpecialGet":
+                creatPetSpecialGet(response);
+            case "deletePetSpecialGet":
+                deletePetSpecialGet(request);
                 break;
             default:
                 signInSignUpServlet.displayAdmin(request,response);
@@ -70,8 +72,7 @@ public class PetServlet extends HttpServlet {
             String age = request.getParameter("age");
             int price = Integer.parseInt(request.getParameter("price"));
             int specialId = Integer.parseInt(request.getParameter("specialId"));
-            Part part = (Part) request.getParts();
-            String image = getFileName(part);
+            String image = request.getParameter("image");
             PetSpecial special = petSpecialManager.findById(specialId);
             Pet pet = new Pet(petName, age, price, special, image);
             boolean check = true;
@@ -88,31 +89,40 @@ public class PetServlet extends HttpServlet {
                 petManager.create(pet);
                 response.sendRedirect("/PetServlet?action=");
             } else {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
                 request.setAttribute("p", pet);
-                requestDispatcher.forward(request, response);
+                createPetGet(request,response);
             }
         } catch (Exception e) {
+            System.err.println(e.getMessage());
             String priceFailMessage = "Giá không hợp lệ!";
             request.setAttribute("priceFailMessage",priceFailMessage);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
-            requestDispatcher.forward(request,response);
+            createPetGet(request,response);
         }
-    }
-    private String getFileName(Part part) {
-        String content = part.getHeader("content-disposition");
-        String[] contents = content.split(";");
-        for (String s : contents) {
-            if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length() -1);
-            }
-        }
-        return "";
     }
 
-    public void creatPetSpecialPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    //    private String getFileName(Part part) {
+//        String content = part.getHeader("content-disposition");
+//        String[] contents = content.split(";");
+//        for (String s : contents) {
+//            if (s.trim().startsWith("filename")) {
+//                return s.substring(s.indexOf("=") + 2, s.length() -1);
+//            }
+//        }
+//        return "";
+//    }
+    public void creatPetSpecialGet(HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("pet/createSpecialPet.jsp");
+    }
+
+    public void creatPetSpecialPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String special = request.getParameter("special");
         PetSpecial petSpecial = new PetSpecial(special);
+        if (petSpecialManager.checkSpecialNameExist(special)) {
+            String petSpecialNameFailMessage = "Tên loài đã tồn tại!";
+            request.setAttribute("petSpecialNameFailMessage", petSpecialNameFailMessage);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createSpecialPet.jsp");
+            requestDispatcher.forward(request,response);
+        }
         petSpecialManager.create(petSpecial);
         response.sendRedirect("pet/createPet.jsp");
     }

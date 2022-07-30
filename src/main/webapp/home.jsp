@@ -13,5 +13,6 @@
 <body>
 <h1>Welcome Home</h1>
 <a href="/PetServlet?action=createPetGet">Create Pet</a>
+<a href="/PetServlet?action=updatePetGet">Update Pet</a>
 </body>
 </html>
