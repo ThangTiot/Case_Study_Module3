@@ -33,7 +33,7 @@ public class PetRepository implements CRUDRepository<Pet>{
                 String age = resultSet.getString("age");
                 int price = resultSet.getInt("price");
                 int petSpecialId = resultSet.getInt("petSpecialId");
-                String image = resultSet.getString("image");
+                String image = "\\image\\" + resultSet.getString("image");
                 String petStatus = resultSet.getString("petStatus");
                 PetSpecial special = petSpecialManager.findById(petSpecialId);
                 Pet pet = new Pet(id, petName, age, price, special, image, petStatus);
@@ -53,7 +53,7 @@ public class PetRepository implements CRUDRepository<Pet>{
             preparedStatement.setString(1,pet.getName());
             preparedStatement.setString(2,pet.getAge());
             preparedStatement.setInt(3,pet.getPrice());
-            preparedStatement.setInt(4,pet.getspecial().getId());
+            preparedStatement.setInt(4,pet.getSpecial().getId());
             preparedStatement.setString(5,pet.getImage());
             preparedStatement.setString(6,pet.getStatus());
             preparedStatement.executeUpdate();
@@ -81,7 +81,7 @@ public class PetRepository implements CRUDRepository<Pet>{
             preparedStatement.setString(1,pet.getName());
             preparedStatement.setString(2,pet.getAge());
             preparedStatement.setInt(3,pet.getPrice());
-            preparedStatement.setInt(4,pet.getspecial().getId());
+            preparedStatement.setInt(4,pet.getSpecial().getId());
             preparedStatement.setString(5,pet.getImage());
             preparedStatement.setString(6,pet.getStatus());
             preparedStatement.setInt(7,pet.getId());

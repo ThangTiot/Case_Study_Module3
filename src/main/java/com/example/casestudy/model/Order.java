@@ -8,6 +8,7 @@ public class Order {
     private Customer customer;
     private LocalDate dateCreateOrder = LocalDate.now();
     private String status = "Chưa thanh toán";
+    private int totalOrder;
 
     public Order() {
     }
@@ -53,5 +54,13 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getTotalOrder() {
+        return totalOrder;
+    }
+
+    public void setTotalOrder(int totalOrder) {
+        this.totalOrder = totalOrder;
     }
 }

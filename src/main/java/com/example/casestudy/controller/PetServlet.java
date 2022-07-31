@@ -29,7 +29,7 @@ public class PetServlet extends HttpServlet {
                 updatePetGet(request,response);
                 break;
             case "deletePetGet":
-                deletePetGet(request);
+                deletePetGet(request,response);
                 break;
             case "creatPetSpecialGet":
                 creatPetSpecialGet(response);
@@ -135,9 +135,9 @@ public class PetServlet extends HttpServlet {
     public void updatePetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         Pet pet = petManager.findById(id);
-        ArrayList<PetSpecial> petSpecialList = petSpecialManager.findAll();
+        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
         request.setAttribute("pet",pet);
-        request.setAttribute("petSpecialList",petSpecialList);
+        request.setAttribute("petSpecials",petSpecials);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/updatePet.jsp");
         requestDispatcher.forward(request,response);
     }
@@ -154,6 +154,7 @@ public class PetServlet extends HttpServlet {
             Pet pet = new Pet(id, petName, age, price, special, image, status);
             if (verifiedPet.verifiedAge(age)) {
                 petManager.update(pet);
+                response.sendRedirect("/PetServlet?action=default");
             } else {
                 String ageFailMessage = "Tuổi không hợp lệ!";
                 request.setAttribute("ageFailMessage", ageFailMessage);
@@ -168,9 +169,10 @@ public class PetServlet extends HttpServlet {
         }
     }
 
-    public void deletePetGet(HttpServletRequest request) {
+    public void deletePetGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         petManager.deleteById(id);
+        response.sendRedirect("/PetServlet?action=default");
     }
 
 

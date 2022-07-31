@@ -30,7 +30,7 @@
                 <div class="button">
                     <button class="first-button" id="firstBtn" type="submit">Sign In</button>
                     <button id="sndBtn" class="first-button"><a style="text-decoration: none; font-weight: normal"
-                                                                href="/LoginServlet?action = signUp">Sign Up</a></button>
+                                                                href="/LoginServlet?action=signUp">Sign Up</a></button>
                 </div>
             </div>
         </div>

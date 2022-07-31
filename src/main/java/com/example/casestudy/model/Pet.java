@@ -62,11 +62,11 @@ public class Pet {
         this.price = price;
     }
 
-    public PetSpecial getspecial() {
+    public PetSpecial getSpecial() {
         return special;
     }
 
-    public void setspecial(PetSpecial special) {
+    public void setSpecial(PetSpecial special) {
         this.special = special;
     }
 

@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "LoginServlet", value = "/LoginServlet")
+@WebServlet(name = "SignInSignUpServlet", urlPatterns = "/LoginServlet")
 public class SignInSignUpServlet extends HttpServlet {
     CustomerManager customerManager = new CustomerManager();
     VerifiedCustomer verifiedCustomer = new VerifiedCustomer();
@@ -121,8 +121,9 @@ public class SignInSignUpServlet extends HttpServlet {
     }
     public void displayCustomer(HttpServletRequest request, HttpServletResponse response, Customer customer) throws ServletException, IOException {
         ArrayList<Pet> pets = petManager.findAll();
-        request.setAttribute("pets", pets);
-        request.setAttribute("customer", customer);
+        HttpSession session = request.getSession();
+        session.setAttribute("pets", pets);
+        session.setAttribute("customer", customer);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("homeCustomer.jsp");
         requestDispatcher.forward(request,response);
     }
