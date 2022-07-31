@@ -25,6 +25,12 @@ public class OrderServlet extends HttpServlet {
                 break;
             case "showCart":
                 showCart(request, response);
+                break;
+            case "deleteCart":
+                deleteCart(request, response);
+                break;
+            case "deleteAllCart":
+                deleteAllCart(request, response);
         }
     }
 
@@ -74,6 +80,29 @@ public class OrderServlet extends HttpServlet {
         HttpSession session = request.getSession();
         ArrayList<Pet> petsListCart = (ArrayList<Pet>) session.getAttribute("petsListCart");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/showCart.jsp");
+        session.setAttribute("petsListCart", petsListCart);
+        requestDispatcher.forward(request,response);
+    }
+
+    public void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        ArrayList<Pet> petsListCart = (ArrayList<Pet>) session.getAttribute("petsListCart");
+        for (Pet pet : petsListCart) {
+            if (pet.getId() == id) {
+                petsListCart.remove(pet);
+                break;
+            }
+        }
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/showCart.jsp");
+        session.setAttribute("petsListCart", petsListCart);
+        requestDispatcher.forward(request,response);
+    }
+    public void deleteAllCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ArrayList<Pet> petsListCart = (ArrayList<Pet>) session.getAttribute("petsListCart");
+        petsListCart.clear();
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/homeCustomer.jsp");
         session.setAttribute("petsListCart", petsListCart);
         requestDispatcher.forward(request,response);
     }

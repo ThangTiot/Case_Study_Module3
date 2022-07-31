@@ -20,7 +20,6 @@
         <th>PRICE</th>
         <th>SPECIAL</th>
         <th>IMAGE</th>
-        <th>STATUS</th>
         <th colspan="3">Action</th>
     </tr>
     <c:forEach items="${petsListCart}" var="p">
@@ -31,9 +30,10 @@
             <td>${p.getPrice()}</td>
             <td>${p.getSpecial().getName()}</td>
             <td><img style="width: 100px; height: 100px" src="${p.getImage()}" alt="${p.getImage()}"></td>
-            <td><button><a style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a></button></td>
+            <td><button><a style="text-decoration: none" href="/OrderServlet?action=deleteCart&id=${p.getId()}">Delete</a></button></td>
         </tr>
     </c:forEach>
 </table>
+<a style="text-decoration: none" href="/OrderServlet?action=deleteAllCart">Delete All Cart</a>
 </body>
 </html>
