@@ -1,0 +1,41 @@
+
+.hero {
+    position: relative;
+    padding: 50px 0 46px;
+
+    background-image: url('../img/h1_hero.png');
+    background-size: cover;
+}
+
+.hero__body {
+    margin: 0 auto;
+    padding: 250px 40px 224px;
+    position: relative;
+}
+
+.hero__heading {
+    color: #000000;
+    font-size: 60px;
+    margin: 0 0 15px 0;
+    letter-spacing: 3.8px;
+}
+
+.hero__subheading {
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.scroll-down {
+    display: block;
+    margin: 0 auto;
+    content: url(../img/icons/arrow-down.png);
+    padding: 18px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+}
+
+.scroll-down:hover {
+    transform: rotate(360deg);
+    transition: 0.5s ease-in-out;
+}

@@ -118,7 +118,7 @@ public class SignInSignUpServlet extends HttpServlet {
     public void displayAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Pet> pets = petManager.findAll();
         request.setAttribute("pets", pets);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("homePage.jsp");
         requestDispatcher.forward(request,response);
     }
     public void displayCustomer(HttpServletRequest request, HttpServletResponse response, Customer customer) throws ServletException, IOException {
@@ -126,7 +126,7 @@ public class SignInSignUpServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("pets", pets);
         session.setAttribute("customer", customer);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("homeCustomer.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("homePage.jsp");
         requestDispatcher.forward(request,response);
     }
 }

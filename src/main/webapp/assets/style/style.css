@@ -1,0 +1,237 @@
+
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;}
+body{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+    color: #000000;
+
+}
+
+.header_header{
+    width: 100%;
+    /*position: fixed;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0px;
+}
+.user-name{
+    color: black;
+}
+.header_info{
+    display: flex;
+    align-items: center;
+}
+.header_nav{
+    display: flex;
+    /*justify-content: space-between;*/
+    font-size: 20px;
+padding-right: 15px;
+
+}
+.header_logo{
+    font-size: 40px;
+}
+.header_nav_link{
+padding: 0 30px;
+    color: #000000;
+
+}
+.row {
+    /*margin-top: 50px;*/
+    /*display: flex;*/
+
+}
+.shop_container{
+    margin-top: 50px;
+    display: flex;
+}
+.shopping-list{
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.column {
+    margin: 0 10px;
+    display: flex;
+}
+
+.inside {
+    flex-wrap: wrap;
+}
+
+.column-1-2 {
+    width: 50%;
+}
+
+.column-1-3 {
+    width: calc(100%/3 + 10px);
+}
+
+.column-1-6 {
+    /*width: calc(100%/6);*/
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid;
+}
+
+.inside .column-1-2:first-child,
+.inside .column-1-3:first-child {
+    margin-left: 0;
+}
+
+.inside .column-1-2:last-child,
+.inside .column-1-3:last-child {
+    margin-right: 0;
+}
+
+.inside .column-1-3:nth-child(-n+3) {
+    margin-top: 0;
+}
+
+.inside .column-1-2:nth-child(-n+2) {
+    margin-bottom: 0;
+}
+
+.inside .column-1-3 {
+    width: calc(100%/3);
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+.admin_icon{
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+}
+.shop_container{
+    display: flex;
+}
+.user-account{
+    display: flex;
+}
+.user-info{
+    padding-left: 15px;
+}
+.categories {
+    width: 350px;
+    margin: 50px auto 20px auto;
+
+    padding: 25px 35px;
+    border: 1px solid ;
+}
+.categories > div {
+    position: relative;
+    margin-block: 45px;
+}
+.categories div .heading {
+    width: fit-content;
+    margin-bottom: 25px;
+    position: relative;
+}
+.categories div .heading::after {
+    content: "";
+    position: absolute;
+    top: 13px;
+    right: -85px;
+    width: 70px;
+    height: 2px;
+
+}
+.categories .list ul li {
+    list-style: none;
+    margin: 40px 0;
+    color: #000000;
+
+    position: relative;
+}
+.categories .list ul li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    color: #000000;
+
+}
+.categories .list ul li::after {
+    content: attr(data);
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    padding: 5px;
+    color: #000000;
+
+    color: #000;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.categories .gallery .content {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    gap: 10px;
+}
+.categories .gallery .content img {
+    border: 2px solid ;
+    width: calc((100% - 20px) / 3);
+    height: 85px;
+}
+.categories .archives ul {
+    margin-left: 17px;
+}
+.categories .archives ul li {
+    padding-left: 15px;
+    margin-block: 30px;
+}
+.categories .archives ul li::marker {
+    content: "\f07b";
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+
+}
+.slide  {
+    background-image: url(https://img.wallpapersafari.com/desktop/1920/1080/22/48/tZaxKq.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.edit_form{
+    display: flex;
+    justify-content: center;
+}
+.form{
+    color: #000000;
+
+    margin-top:5%;
+    border: 1px solid;
+    padding: 10px 20px;
+}
+/* .inside .row:first-child .column {
+    margin: 0 20px 10px 0;
+}
+
+.inside .row:last-child .column {
+    margin: 10px 20px 0 0;
+}
+
+.inside .row .column:last-child {
+    margin-right: 0;
+} */
