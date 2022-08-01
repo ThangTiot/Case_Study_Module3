@@ -26,7 +26,7 @@ public class OrderManager implements CRUDService<Order>{
 
     @Override
     public ArrayList<Order> findAll() {
-        return null;
+        return orderRepository.findAll();
     }
 
     @Override
@@ -42,5 +42,9 @@ public class OrderManager implements CRUDService<Order>{
     @Override
     public void deleteById(int id) {
 
+    }
+
+    public Order findOrderNew() {
+        return orderRepository.findOrderNew();
     }
 }

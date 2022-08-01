@@ -9,7 +9,7 @@ public class Order {
     private int id;
     private Customer customer;
     private LocalDate dateCreateOrder = LocalDate.now();
-    private String status = "Chưa thanh toán";
+    private String status = "Unpaid";
     private int totalOrder;
 
     public Order() {
@@ -19,12 +19,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public Order(int id, Customer customer, LocalDate dateCreateOrder, String status, int totalOrder) {
+    public Order(int id, Customer customer, LocalDate dateCreateOrder, String status) {
         this.id = id;
         this.customer = customer;
         this.dateCreateOrder = dateCreateOrder;
         this.status = status;
-        this.totalOrder = totalOrder;
     }
 
     public int getId() {

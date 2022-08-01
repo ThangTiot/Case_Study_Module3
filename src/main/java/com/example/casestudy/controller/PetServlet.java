@@ -9,6 +9,7 @@ import com.example.casestudy.service.PetSpecialManager;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -171,9 +172,16 @@ public class PetServlet extends HttpServlet {
 
     public void deletePetGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        petManager.deleteById(id);
-        response.sendRedirect("/PetServlet?action=default");
+        int result = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn xóa không?",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            petManager.deleteById(id);
+            response.sendRedirect("/PetServlet?action=default");
+        } else {
+            response.sendRedirect("/PetServlet?action=default");
+        }
     }
-
-
 }
