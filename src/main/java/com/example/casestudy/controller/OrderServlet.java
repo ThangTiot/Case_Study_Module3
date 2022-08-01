@@ -119,11 +119,12 @@ public class OrderServlet extends HttpServlet {
         session.setAttribute("petsListCart", petsListCart);
         requestDispatcher.forward(request,response);
     }
-    public void order(HttpServletRequest request, HttpServletResponse response) {
+    public void order(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         ArrayList<Pet> petsListCart = (ArrayList<Pet>) session.getAttribute("petsListCart");
         Customer customer = (Customer) session.getAttribute("customer");
         Order order = new Order(customer);
         orderManager.create(order);
+        response.sendRedirect("homeCustomer.jsp");
     }
 }

@@ -29,6 +29,8 @@ public class SignInSignUpServlet extends HttpServlet {
                 requestDispatcher.forward(request,response);
                 break;
             case "logOut":
+                HttpSession session = request.getSession();
+                session.invalidate();
                 response.sendRedirect("SignIN_SignUp.jsp");
                 break;
         }

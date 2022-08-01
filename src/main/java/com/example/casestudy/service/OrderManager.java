@@ -1,5 +1,6 @@
 package com.example.casestudy.service;
 
+import com.example.casestudy.DAO.OrderRepository;
 import com.example.casestudy.model.Customer;
 import com.example.casestudy.model.Order;
 import com.example.casestudy.model.Pet;
@@ -7,9 +8,10 @@ import com.example.casestudy.model.Pet;
 import java.util.ArrayList;
 
 public class OrderManager implements CRUDService<Order>{
+    OrderRepository orderRepository = new OrderRepository();
     @Override
     public void create(Order order) {
-
+        orderRepository.create(order);
     }
 
     public String totalPriceTemp(ArrayList<Pet> pets) {

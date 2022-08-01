@@ -4,6 +4,7 @@ import com.example.casestudy.connection.MyConnection;
 import com.example.casestudy.model.Order;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class OrderRepository implements CRUDRepository<Order>{
             Connection connection = myConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ORDER);
             preparedStatement.setInt(1,order.getCustomer().getId());
-            preparedStatement.setDate(2,order.getDateCreateOrder());
+            preparedStatement.setDate(2, Date.valueOf(order.getDateCreateOrder()));
             preparedStatement.setString(3,order.getStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
