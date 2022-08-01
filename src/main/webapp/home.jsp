@@ -31,13 +31,12 @@
             <td>${p.getId()}</td>
             <td>${p.getName()}</td>
             <td>${p.getAge()}</td>
-            <td>${p.getPrice()}</td>
+            <td>${p.getPriceString()}</td>
             <td>${p.getSpecial().getName()}</td>
             <td><img style="width: 100px; height: 100px" src="${p.getImage()}" alt="${p.getImage()}"></td>
             <td>${p.getStatus()}</td>
             <td><button><a style="text-decoration: none" href="/PetServlet?action=updatePetGet&id=${p.getId()}">Update</a></button></td>
             <td><button><a style="text-decoration: none" href="/PetServlet?action=deletePetGet&id=${p.getId()}">Delete</a></button></td>
-            <td><button><a style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a></button></td>
         </tr>
     </c:forEach>
 </table>

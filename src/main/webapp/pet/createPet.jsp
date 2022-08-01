@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Pet Price</label>
+        <label class="control-label">Pet Price (VND)</label>
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>

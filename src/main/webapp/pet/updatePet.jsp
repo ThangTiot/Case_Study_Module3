@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Pet Price</label>
+        <label class="control-label">Pet Price (VND)</label>
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
@@ -66,8 +66,8 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
                 <select name="status" class="form-control">
-                    <option value="Còn hàng">Còn hàng</option>
-                    <option value="Đã bán">Đã bán</option>
+                    <option value="Available">Available</option>
+                    <option value="Sold">Sold</option>
                 </select>
             </div>
         </div>

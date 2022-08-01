@@ -1,6 +1,9 @@
 package com.example.casestudy.controller;
 
+import com.example.casestudy.model.Customer;
+import com.example.casestudy.model.Order;
 import com.example.casestudy.model.Pet;
+import com.example.casestudy.service.OrderManager;
 import com.example.casestudy.service.PetManager;
 
 import javax.servlet.*;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 @WebServlet(name = "OrderServlet", value = "/OrderServlet")
 public class OrderServlet extends HttpServlet {
     PetManager petManager = new PetManager();
+    OrderManager orderManager = new OrderManager();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +35,9 @@ public class OrderServlet extends HttpServlet {
                 break;
             case "deleteAllCart":
                 deleteAllCart(request, response);
+                break;
+            case "order":
+                order(request, response);
         }
     }
 
@@ -79,8 +86,15 @@ public class OrderServlet extends HttpServlet {
     public void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         ArrayList<Pet> petsListCart = (ArrayList<Pet>) session.getAttribute("petsListCart");
+        String totalPriceTemp;
+        if (petsListCart == null) {
+            totalPriceTemp = "Ban chua mua san pham nao!";
+        } else {
+            totalPriceTemp = orderManager.totalPriceTemp(petsListCart);
+        }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/showCart.jsp");
         session.setAttribute("petsListCart", petsListCart);
+        session.setAttribute("totalPriceTemp", totalPriceTemp);
         requestDispatcher.forward(request,response);
     }
 
@@ -94,9 +108,8 @@ public class OrderServlet extends HttpServlet {
                 break;
             }
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/showCart.jsp");
         session.setAttribute("petsListCart", petsListCart);
-        requestDispatcher.forward(request,response);
+        showCart(request,response);
     }
     public void deleteAllCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -105,5 +118,12 @@ public class OrderServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/homeCustomer.jsp");
         session.setAttribute("petsListCart", petsListCart);
         requestDispatcher.forward(request,response);
+    }
+    public void order(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        ArrayList<Pet> petsListCart = (ArrayList<Pet>) session.getAttribute("petsListCart");
+        Customer customer = (Customer) session.getAttribute("customer");
+        Order order = new Order(customer);
+        orderManager.create(order);
     }
 }

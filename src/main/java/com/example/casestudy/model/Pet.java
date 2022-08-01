@@ -1,5 +1,8 @@
 package com.example.casestudy.model;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Pet {
     private int id;
     private String name;
@@ -7,7 +10,7 @@ public class Pet {
     private int price;
     private PetSpecial special;
     private String image;
-    private String status = "Còn hàng";
+    private String status = "Available";
 
     public Pet() {
     }
@@ -58,6 +61,7 @@ public class Pet {
         return price;
     }
 
+
     public void setPrice(int price) {
         this.price = price;
     }
@@ -85,17 +89,11 @@ public class Pet {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", price=" + price +
-                ", special='" + special + '\'' +
-                ", image='" + image + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+    public String getPriceString() {
+        int a = price;
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        String accountBalance = numberFormat.format(a);
+        return accountBalance;
     }
 }

@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "SignInSignUpServlet", urlPatterns = "/LoginServlet")
+@WebServlet(name = "SignInSignUpServlet", value = "/LoginServlet")
 public class SignInSignUpServlet extends HttpServlet {
     CustomerManager customerManager = new CustomerManager();
     VerifiedCustomer verifiedCustomer = new VerifiedCustomer();

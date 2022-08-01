@@ -27,15 +27,20 @@
         <th colspan="3">Action</th>
     </tr>
     <c:forEach items="${pets}" var="p">
-        <tr>
+        <tr style="display: ">
             <td>${p.getId()}</td>
             <td>${p.getName()}</td>
             <td>${p.getAge()}</td>
-            <td>${p.getPrice()}</td>
+            <td>${p.getPriceString()}</td>
             <td>${p.getSpecial().getName()}</td>
             <td><img style="width: 100px; height: 100px" src="${p.getImage()}" alt="${p.getImage()}"></td>
             <td>${p.getStatus()}</td>
-            <td><button><a style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a></button></td>
+            <c:if test="${p.getStatus() eq 'Sold'}">
+            <td><button disabled>AddToCart</button></td>
+            </c:if>
+            <c:if test="${p.getStatus() eq 'Available'}">
+                <td><button><a style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a></button></td>
+            </c:if>
         </tr>
     </c:forEach>
 </table>
