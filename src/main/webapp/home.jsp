@@ -92,9 +92,12 @@
             <div>
             <form class="pet_species" method="post" action="#">
                 <c:forEach items="${petSpecials}" var="sp">
+                    <div class="categories_input">
                     <label><input type="checkbox" class="choose" name="checkbox" value="${sp.getId()}">
                             ${sp.getName()}</label>
-                    <button><a style="text-decoration: none" href="/PetServlet?action=deletePetSpecialGet&id=${sp.getId()}">Delete</a></button><br>
+                  <a  class="species_btn" style="text-decoration: none" href="/PetServlet?action=deletePetSpecialGet&id=${sp.getId()}">
+                        <i class="fa fa-trash" aria-hidden="true"></i></a><br>
+                    </div>
                 </c:forEach>
                 <br>
                 <input type="submit" name="Search">
@@ -105,12 +108,12 @@
     <div class="shopping-list">
 
 <c:forEach items="${pets}" var="p">
-        <div class="column column-1-6" style="width: 250px; height: 425px">
+        <div class="column column-1-6" style="width: 250px; height: 380px">
             <img src="${p.getImage()}" alt="${p.getImage()}" style="width: 200px; height: 200px">
-            <p>${p.getName()} (${p.getAge()} tuổi)</p>
-            <p>${p.getSpecial().getName()}</p>
-            <p>${p.getPriceString()}</p>
-            <p>${p.getStatus()}</p>
+            <p class="pet_info">${p.getName()} (${p.getAge()} tuổi)</p>
+            <p class="pet_info">${p.getSpecial().getName()}</p>
+            <p class="pet_info">${p.getPriceString()}</p>
+            <p class="pet_info">${p.getStatus()}</p>
             <br>
             <span class="admin_icon">
                 <a href="/PetServlet?action=updatePetGet&id=${p.getId()}" class="product-edit">
