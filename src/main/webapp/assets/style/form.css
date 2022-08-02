@@ -1,0 +1,61 @@
+body{
+    background :#0CF;
+}
+.edit_form{
+    max-width:400px;
+    width:100%;
+    margin:0 auto;
+    position:relative;
+}
+#form_edit{
+    background:#F9F9F9;
+    padding:25px;
+    margin:50px 0;
+}
+#form_edit h1{
+    color: #F96;
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+}
+#form_edit input[type="text"],#form_edit input[type="file"] {
+    width:100%;
+    border:1px solid #CCC;
+    background:#FFF;
+    margin:0 0 5px;
+    padding:10px;
+}
+
+#form_edit input[type="text"]:hover, #form_edit input[type="file"]:hover {
+    -webkit-transition:border-color 0.3s ease-in-out;
+    -moz-transition:border-color 0.3s ease-in-out;
+    transition:border-color 0.3s ease-in-out;
+    border:1px solid #AAA;
+}
+
+#form_edit button[type="submit"] {
+    cursor:pointer;
+    width:100%;
+    border:none;
+    background:#0CF;
+    color:#FFF;
+    margin:0 0 5px;
+    padding:10px;
+    font-size:15px;
+}
+#form_edit button[type="submit"]:hover {
+    background:#09C;
+    -webkit-transition:background 0.3s ease-in-out;
+    -moz-transition:background 0.3s ease-in-out;
+    transition:background-color 0.3s ease-in-out;
+}
+.form-group{
+    margin: 5px 0;
+}
+.inputGroupContainer{
+    margin-top: 10px;
+}
+
+.form-control{
+    padding: 5px 0;
+}

@@ -10,9 +10,13 @@
 <html>
 <head>
     <title>Update Pet</title>
+    <link rel="icon" href="assets/img/favicon.png"/>
+    <link rel="stylesheet" href="assets/style/form.css">
 </head>
 <body>
-<form action="/PetServlet?action=updatePetPost" class="form" method="post">
+<div class="edit_form">
+<form action="/PetServlet?action=updatePetPost" class="form" id="form_edit" method="post">
+
     <h1> Edit Form </h1>
     <div>
         <input name="id" type="text" value="${pet.getId()}" hidden>
@@ -48,7 +52,7 @@
     </div>
     <div class="form-group">
         <label class=" control-label">Species</label>
-        <div class=" selectContainer">
+        <div class=" inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
                 <select name="specialId" class="form-control">
@@ -77,7 +81,7 @@
         <div class="inputGroupContainer">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-paw" aria-hidden="true"></i></span>
-                <input name="image" class="form-control" type="file">
+                <input name="image" class="form-control"  style ="border: 0px; padding: 0;margin: 0 0 5px;width: 100%;background:#F9F9F9" type="file">
             </div>
         </div>
     </div>
@@ -85,10 +89,12 @@
     <div class="form-group">
         <label class=" control-label"></label>
         <div class="bnt">
-            <button type="submit" class="btn" style="width: 150px;height: 30px">Send
+            <button type="submit" class="btn" >Send
             </button>
         </div>
     </div>
+
 </form>
+</div>
 </body>
 </html>

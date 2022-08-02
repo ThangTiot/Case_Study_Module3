@@ -10,6 +10,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="CSS/SignIn_SignUp.css">
+    <link rel="icon" href="assets/img/favicon.png"/>
     <title>LogIn</title>
 </head>
 <body>

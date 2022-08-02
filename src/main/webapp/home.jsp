@@ -100,7 +100,7 @@
                     </div>
                 </c:forEach>
                 <br>
-                <input type="submit" name="Search">
+                <input type="submit" value="Search">
             </form>
             </div>
         </div>

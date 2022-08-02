@@ -1,5 +1,8 @@
 body{
-    background: url(https://img.wallpapersafari.com/desktop/1920/1080/22/48/tZaxKq.jpg)
+    /*background: url(https://img.wallpapersafari.com/desktop/1920/1080/22/48/tZaxKq.jpg);*/
+    /*background: url(https://png.pngtree.com/thumb_back/fh260/back_our/20190619/ourmid/pngtree-pet-hospital-poster-background-image_138005.jpg);*/
+    background: url("../assets/img/aaa.jpeg");
+    background-size: cover;
 }
 .popup .content {
     
@@ -10,8 +13,8 @@ body{
     left: 37%;
     padding: 20px 20px 50px 20px;
     border-radius: 20px;
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
     position: absolute;
     z-index: 1;
 }
