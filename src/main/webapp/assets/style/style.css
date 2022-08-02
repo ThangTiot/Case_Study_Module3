@@ -67,7 +67,7 @@ padding: 0 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    width: 60%;
+    /*width: 60%;*/
     flex-direction: row;
 }
 .product-cart{
@@ -144,14 +144,14 @@ img {
     padding-left: 15px;
 }
 .categories {
-    width: 350px;
+    width: 250px;
     margin: 20px 0 0 100px;
     padding: 25px 35px;
     border: 1px solid;
 }
 .categories > div {
     position: relative;
-    margin-block: 45px;
+    /*margin-block: 45px;*/
 }
 .categories div .heading {
     width: fit-content;
@@ -173,6 +173,32 @@ img {
     color: #000000;
 
     position: relative;
+}
+.pet_species{
+    margin-top: 20px;
+}
+.pet_info{
+margin-bottom:0;
+}
+.species_btn{
+    margin-left: 20px;
+    float:left;
+}
+.categories_input{
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
+.form_create{
+    margin-top: 20px;
+
+}
+.form-name{
+    margin-bottom: 10px;
+
+}
+.form-control{
+    width: 200px;
+    margin: 10px 0;
 }
 .categories .list ul li:not(:last-child)::before {
     content: "";
