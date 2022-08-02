@@ -5,11 +5,20 @@
 
     background-image: url('../img/h1_hero.png');
     background-size: cover;
-}
+}.hero_shop{
+     position: relative;
+     /*padding: 50px 0 46px;*/
+     background-image: url('../img/hero2.png');
+     background-size: cover;
+ }
 
 .hero__body {
     margin: 0 auto;
     padding: 250px 40px 224px;
+    position: relative;
+}.hero__body__shop {
+    margin: 0 auto;
+    padding: 25px 40px;
     position: relative;
 }
 
@@ -18,6 +27,10 @@
     font-size: 60px;
     margin: 0 0 15px 0;
     letter-spacing: 3.8px;
+}
+.hero__heading__shop{
+    text-align: center;
+    font-size: 50px;
 }
 
 .hero__subheading {

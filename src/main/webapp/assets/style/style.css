@@ -23,6 +23,13 @@ a{
     align-items: center;
     padding: 20px 0px;
 }
+.species_add{
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5%;
+    background: gray;
+    margin-bottom: 10px;
+}
 .user-name{
     color: black;
 }
@@ -53,11 +60,21 @@ padding: 0 30px;
 .shop_container{
     margin-top: 50px;
     display: flex;
+    align-items:flex-start;
 }
 .shopping-list{
     margin: 20px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 60%;
+    flex-direction: row;
+}
+.product-cart{
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5%;
+    background: gray;
 }
 .column {
     margin: 0 10px;
@@ -79,7 +96,7 @@ padding: 0 30px;
 .column-1-6 {
     /*width: calc(100%/6);*/
     display: flex;
-
+    margin-bottom: 35px;
     flex-direction: column;
     align-items: center;
     padding: 20px;
@@ -128,10 +145,9 @@ img {
 }
 .categories {
     width: 350px;
-    margin: 50px auto 20px auto;
-
+    margin: 20px 0 0 100px;
     padding: 25px 35px;
-    border: 1px solid ;
+    border: 1px solid;
 }
 .categories > div {
     position: relative;
@@ -235,3 +251,61 @@ img {
 .inside .row .column:last-child {
     margin-right: 0;
 } */
+.range-filter {
+    padding-top:10px;
+    width:240px;
+    margin:auto;
+    margin-bottom:10px;
+}
+.range-controls {
+    position:relative;
+    height:80px;
+    margin-bottom:15px;
+    padding:0 30px;
+    background:#34495e;
+    border-radius:5px;
+    overflow:hidden;
+}
+.scale {
+    margin-top:39px;
+    height:2px;
+    background:#d7dcde;
+}
+.bar{
+    height:2px;
+    background:#00ca74;
+}
+.toggle {
+    position:absolute;
+    top:30px;
+    left:30px;
+    width:4px;
+    height:4px;
+    border:8px solid white;
+    background:#ababab;
+    cursor:pointer;
+    border-radius:50%;
+}
+.min-toggle {
+    left:70px;
+}
+.max-toggle {
+    left:165px;
+}
+.price-controls input{
+    width:55px;
+    padding:8px 10px;
+    margin-left:10px;
+    border:none;
+    background:#34495e;
+    font-size:16px;
+    font-family:"Tahoma", sans-serif;
+    text-align:center;
+    color:#283136;
+    border-radius:5px;
+    color:white;
+}
+
+.min-price {
+    margin-right:14px;
+}

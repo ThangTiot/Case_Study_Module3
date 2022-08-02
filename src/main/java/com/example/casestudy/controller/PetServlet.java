@@ -104,7 +104,7 @@ public class PetServlet extends HttpServlet {
     }
 
     public void creatPetSpecialGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pet/speciesView.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
         request.setAttribute("createSpeciesMessage", "createSpeciesMessage");
         requestDispatcher.forward(request, response);
     }
@@ -115,7 +115,7 @@ public class PetServlet extends HttpServlet {
             String petSpecialNameFailMessage = "Tên loài đã tồn tại!";
             request.setAttribute("petSpecialNameFailMessage", petSpecialNameFailMessage);
             request.setAttribute("petSpecialNameFailValue", special);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pet/speciesView.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
             requestDispatcher.forward(request, response);
         } else {
             PetSpecial petSpecial = new PetSpecial(special);
@@ -123,7 +123,7 @@ public class PetServlet extends HttpServlet {
             HttpSession session = request.getSession();
             ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
             session.setAttribute("petSpecials", petSpecials);
-            response.sendRedirect("homePage.jsp");
+            response.sendRedirect("home.jsp");
         }
 
     }
@@ -141,7 +141,7 @@ public class PetServlet extends HttpServlet {
             ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
             session.setAttribute("petSpecials", petSpecials);
         }
-        response.sendRedirect("/pet/speciesView.jsp");
+        response.sendRedirect("home.jsp");
     }
 
     public void updatePetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
