@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -47,12 +48,28 @@
                         </span>
                         Services
                     </a>
-                    <a class="header_nav_link" href="#">
+                    <c:if test="${admin != null}">
+                        <a class="header_nav_link" href="home.jsp">
                         <span>
                             <i class="fa fa-bell" aria-hidden="true"></i>
                         </span>
-                        Shop
-                    </a>
+                            Shop
+                        </a>
+                    </c:if>
+                    <c:if test="${customer != null}">
+                        <a class="header_nav_link" href="homeCustomer.jsp">
+                        <span>
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                        </span>
+                            Shop
+                        </a>
+                    </c:if>
+<%--                    <a class="header_nav_link" href="home.jsp">--%>
+<%--                        <span>--%>
+<%--                            <i class="fa fa-bell" aria-hidden="true"></i>--%>
+<%--                        </span>--%>
+<%--                        Shop--%>
+<%--                    </a>--%>
                     <a class="header_nav_link" href="#"><span>
                 <i class="fa fa-venus-mars" aria-hidden="true"></i>
             </span>
@@ -61,18 +78,24 @@
                 </nav>
                 <div class="user-account">
                     <div class="user-cart">
-                        <a class="user-name" href="#" >
+                        <a class="user-name" href="/OrderServlet?action=showCart" >
                             <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px;"></i>
                             YOUR CART</a>
 
                     </div>
                     <div class="user-info">
-                        <a id="user-name" class="user-name" href="#" style="padding-right: 10px;">
+                        <c:if test="${admin != null}">
+                        <a id="user-name" class="user-name" style="padding-right: 10px;">
                             <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
                             ADMIN</a>
-                        <a href="#" class="user-name" >
+                        </c:if>
+                        <c:if test="${customer != null}">
+                            <a id="user-name" class="user-name" style="padding-right: 10px;">
+                                <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
+                                ${customer.getUsername().toUpperCase()}</a>
+                        </c:if>
+                        <a href="/LoginServlet?action=logOut" class="user-name" >
                             <i class="fas fa-sign-out-alt" style="font-size: 25px; padding-right: 5px;"></i>
-
                             Log Out
                         </a>
                     </div>

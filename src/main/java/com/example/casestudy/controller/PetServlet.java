@@ -19,26 +19,28 @@ public class PetServlet extends HttpServlet {
     PetSpecialManager petSpecialManager = new PetSpecialManager();
     PetManager petManager = new PetManager();
     SignInSignUpServlet signInSignUpServlet = new SignInSignUpServlet();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
         switch (action) {
             case "createPetGet":
-                createPetGet(request,response);
+                createPetGet(request, response);
                 break;
             case "updatePetGet":
-                updatePetGet(request,response);
+                updatePetGet(request, response);
                 break;
             case "deletePetGet":
-                deletePetGet(request,response);
+                deletePetGet(request, response);
                 break;
             case "creatPetSpecialGet":
-                creatPetSpecialGet(response);
+                creatPetSpecialGet(request, response);
+                break;
             case "deletePetSpecialGet":
-                deletePetSpecialGet(request);
+                deletePetSpecialGet(request, response);
                 break;
             default:
-                signInSignUpServlet.displayAdmin(request,response);
+                signInSignUpServlet.displayAdmin(request, response);
                 break;
         }
 
@@ -49,21 +51,21 @@ public class PetServlet extends HttpServlet {
         String action = request.getParameter("action");
         switch (action) {
             case "createPetPost":
-                createPetPost(request,response);
+                createPetPost(request, response);
                 break;
             case "creatPetSpecialPost":
-                creatPetSpecialPost(request,response);
+                creatPetSpecialPost(request, response);
                 break;
             case "updatePetPost":
-                updatePetPost(request,response);
+                updatePetPost(request, response);
                 break;
         }
     }
 
     public void createPetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
-        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
-        request.setAttribute("petSpecials", petSpecials);
+//        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+//        request.setAttribute("petSpecials", petSpecials);
         requestDispatcher.forward(request, response);
     }
 
@@ -91,57 +93,67 @@ public class PetServlet extends HttpServlet {
                 response.sendRedirect("/PetServlet?action=");
             } else {
                 request.setAttribute("p", pet);
-                createPetGet(request,response);
+                createPetGet(request, response);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
             String priceFailMessage = "Giá không hợp lệ!";
-            request.setAttribute("priceFailMessage",priceFailMessage);
-            createPetGet(request,response);
+            request.setAttribute("priceFailMessage", priceFailMessage);
+            createPetGet(request, response);
         }
     }
 
-    //    private String getFileName(Part part) {
-//        String content = part.getHeader("content-disposition");
-//        String[] contents = content.split(";");
-//        for (String s : contents) {
-//            if (s.trim().startsWith("filename")) {
-//                return s.substring(s.indexOf("=") + 2, s.length() -1);
-//            }
-//        }
-//        return "";
-//    }
-    public void creatPetSpecialGet(HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("pet/createSpecialPet.jsp");
+    public void creatPetSpecialGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pet/speciesView.jsp");
+        request.setAttribute("createSpeciesMessage", "createSpeciesMessage");
+        requestDispatcher.forward(request, response);
     }
 
     public void creatPetSpecialPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String special = request.getParameter("special");
-        PetSpecial petSpecial = new PetSpecial(special);
         if (petSpecialManager.checkSpecialNameExist(special)) {
             String petSpecialNameFailMessage = "Tên loài đã tồn tại!";
             request.setAttribute("petSpecialNameFailMessage", petSpecialNameFailMessage);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createSpecialPet.jsp");
-            requestDispatcher.forward(request,response);
+            request.setAttribute("petSpecialNameFailValue", special);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pet/speciesView.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            PetSpecial petSpecial = new PetSpecial(special);
+            petSpecialManager.create(petSpecial);
+            HttpSession session = request.getSession();
+            ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+            session.setAttribute("petSpecials", petSpecials);
+            response.sendRedirect("homePage.jsp");
         }
-        petSpecialManager.create(petSpecial);
-        response.sendRedirect("pet/createPet.jsp");
+
     }
 
-    public void deletePetSpecialGet(HttpServletRequest request) {
+    public void deletePetSpecialGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        petSpecialManager.deleteById(id);
+        int result = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn xóa không?",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            petSpecialManager.deleteById(id);
+            HttpSession session = request.getSession();
+            ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+            session.setAttribute("petSpecials", petSpecials);
+        }
+        response.sendRedirect("/pet/speciesView.jsp");
     }
 
     public void updatePetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         Pet pet = petManager.findById(id);
-        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
-        request.setAttribute("pet",pet);
-        request.setAttribute("petSpecials",petSpecials);
+//        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+//        request.setAttribute("petSpecials",petSpecials);
+        request.setAttribute("pet", pet);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/updatePet.jsp");
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
     }
+
     public void updatePetPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -164,9 +176,9 @@ public class PetServlet extends HttpServlet {
             }
         } catch (Exception e) {
             String priceFailMessage = "Giá không hợp lệ!";
-            request.setAttribute("priceFailMessage",priceFailMessage);
+            request.setAttribute("priceFailMessage", priceFailMessage);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/updatePet.jsp");
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         }
     }
 
@@ -179,9 +191,7 @@ public class PetServlet extends HttpServlet {
                 JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             petManager.deleteById(id);
-            response.sendRedirect("/PetServlet?action=default");
-        } else {
-            response.sendRedirect("/PetServlet?action=default");
         }
+        response.sendRedirect("/PetServlet?action=default");
     }
 }

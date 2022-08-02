@@ -55,6 +55,7 @@
                     <option value="${s.getId()}">${s.getName()}</option>
                     </c:forEach>
                 </select>
+                <button style="margin-bottom: 10px"><a style="text-decoration: none" href="/PetServlet?action=creatPetSpecialGet">Create new species</a></button>
             </div>
         </div>
     </div>

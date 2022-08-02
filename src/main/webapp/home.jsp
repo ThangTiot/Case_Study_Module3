@@ -15,6 +15,7 @@
 <h1>Welcome Home</h1>
 <h1>List Product</h1>
 <button style="margin-bottom: 10px"><a style="text-decoration: none" href="/PetServlet?action=createPetGet">Create new product</a></button>
+<button style="margin-bottom: 10px"><a style="text-decoration: none" href="/pet/speciesView.jsp">Species Of Shop</a></button>
 <button style="margin-bottom: 10px"><a style="text-decoration: none" href="/LoginServlet?action=logOut">LogOut</a></button>
 <table border="1" width="800px">
     <tr>

@@ -3,12 +3,15 @@ package com.example.casestudy.controller;
 import com.example.casestudy.Verified.VerifiedCustomer.VerifiedCustomer;
 import com.example.casestudy.model.Customer;
 import com.example.casestudy.model.Pet;
+import com.example.casestudy.model.PetSpecial;
 import com.example.casestudy.service.CustomerManager;
 import com.example.casestudy.service.PetManager;
+import com.example.casestudy.service.PetSpecialManager;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ public class SignInSignUpServlet extends HttpServlet {
     CustomerManager customerManager = new CustomerManager();
     VerifiedCustomer verifiedCustomer = new VerifiedCustomer();
     PetManager petManager = new PetManager();
+    PetSpecialManager petSpecialManager = new PetSpecialManager();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,6 +108,8 @@ public class SignInSignUpServlet extends HttpServlet {
         }
         if (check) {
             customerManager.create(customer);
+            JOptionPane.showMessageDialog(null,"Tạo tài khoản thành công!","Đăng kí tài khoản",
+                    JOptionPane.INFORMATION_MESSAGE);
             response.sendRedirect("SignIN_SignUp.jsp");
         } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
@@ -116,8 +122,13 @@ public class SignInSignUpServlet extends HttpServlet {
     }
 
     public void displayAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         ArrayList<Pet> pets = petManager.findAll();
-        request.setAttribute("pets", pets);
+        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+        String admin = "admin";
+        session.setAttribute("pets", pets);
+        session.setAttribute("admin", admin);
+        session.setAttribute("petSpecials", petSpecials);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("homePage.jsp");
         requestDispatcher.forward(request,response);
     }

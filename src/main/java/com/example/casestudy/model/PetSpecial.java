@@ -3,6 +3,7 @@ package com.example.casestudy.model;
 public class PetSpecial {
     private int id;
     private String specialName;
+    private int checkDelete = 1;
 
     public PetSpecial() {
     }
@@ -30,5 +31,13 @@ public class PetSpecial {
 
     public void setName(String name) {
         this.specialName = name;
+    }
+
+    public int getCheckDelete() {
+        return checkDelete;
+    }
+
+    public void setCheckDelete(int checkDelete) {
+        this.checkDelete = checkDelete;
     }
 }

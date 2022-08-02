@@ -13,7 +13,8 @@ address varchar(90)
 
 create table petSpecial(
 id int auto_increment primary key,
-special varchar(50)
+special varchar(50),
+checkDelete int 
 );
 
 create table pet(
@@ -24,7 +25,8 @@ price int not null,
 petSpecialId int not null,
 foreign key (petSpecialId) references petSpecial (id),
 image varchar(500),
-petStatus varchar(50)
+petStatus varchar(50),
+checkDelete int
 );
 
 

@@ -12,6 +12,7 @@
     <title>Cart</title>
 </head>
 <body>
+<c:if test="${petsListCart} != "
 <table border="1" width="800px">
     <tr>
         <th>ID</th>
@@ -37,7 +38,6 @@
         <td>Total:</td>
         <td colspan="4">${totalPriceTemp}</td>
         <td><button><a style="text-decoration: none" href="/OrderServlet?action=order">Order</a></button></td>
-        <td><button><a style="text-decoration: none" href="/OrderServlet?action=pay">Pay</a></button></td>
     </tr>
 </table>
 <a style="text-decoration: none" href="/OrderServlet?action=deleteAllCart">Delete All Cart</a>

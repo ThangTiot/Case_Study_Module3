@@ -15,10 +15,11 @@ public class PetRepository implements CRUDRepository<Pet>{
     MyConnection myConnection = new MyConnection();
     PetSpecialManager petSpecialManager = new PetSpecialManager();
     private final String SELECT_ALL_PET = "select * from pet";
-    private final String CREATE_PET = "insert into pet(petName, age, price, petSpecialId, image, petStatus) values (?,?,?,?,?,?)";
-    private final String DELETE_PET_BY_ID = "delete from pet where id = ?";
+    private final String CREATE_PET = "insert into pet(petName, age, price, petSpecialId, image, petStatus, checkDelete) values (?,?,?,?,?,?,?)";
+    private final String DELETE_PET_BY_ID = "update pet set checkDelete = 0 where id = ?";
     private final String UPDATE_PET_BT_ID = "update pet set petName = ? , age = ? , price = ? , petSpecialId = ? , " +
             "image = ? , petStatus = ? where id = ?";
+    private final String UPDATE_PET_AFTER_BUY = "update pet set petStatus = ? where id = ?";
 
     @Override
     public ArrayList<Pet> findAll() {
@@ -35,9 +36,12 @@ public class PetRepository implements CRUDRepository<Pet>{
                 int petSpecialId = resultSet.getInt("petSpecialId");
                 String image = "\\image\\" + resultSet.getString("image");
                 String petStatus = resultSet.getString("petStatus");
+                int check = resultSet.getInt("checkDelete");
                 PetSpecial special = petSpecialManager.findById(petSpecialId);
-                Pet pet = new Pet(id, petName, age, price, special, image, petStatus);
-                petList.add(pet);
+                if (check == 1) {
+                    Pet pet = new Pet(id, petName, age, price, special, image, petStatus);
+                    petList.add(pet);
+                }
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -56,6 +60,7 @@ public class PetRepository implements CRUDRepository<Pet>{
             preparedStatement.setInt(4,pet.getSpecial().getId());
             preparedStatement.setString(5,pet.getImage());
             preparedStatement.setString(6,pet.getStatus());
+            preparedStatement.setInt(7,pet.getCheck());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -85,6 +90,17 @@ public class PetRepository implements CRUDRepository<Pet>{
             preparedStatement.setString(5,pet.getImage());
             preparedStatement.setString(6,pet.getStatus());
             preparedStatement.setInt(7,pet.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    public void updatePetAfterBuy(Pet pet) {
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PET_AFTER_BUY);
+            preparedStatement.setString(1,"Sold");
+            preparedStatement.setInt(2,pet.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e.getMessage());

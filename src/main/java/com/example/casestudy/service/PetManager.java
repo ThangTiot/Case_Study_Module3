@@ -48,4 +48,8 @@ public class PetManager implements CRUDService<Pet>{
         }
         return false;
     }
+
+    public void updatePetAfterBuy(Pet pet) {
+        petRepository.updatePetAfterBuy(pet);
+    }
 }

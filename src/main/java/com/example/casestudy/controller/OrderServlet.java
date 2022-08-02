@@ -20,6 +20,7 @@ public class OrderServlet extends HttpServlet {
     PetManager petManager = new PetManager();
     OrderManager orderManager = new OrderManager();
     OrderDetailManager orderDetailManager = new OrderDetailManager();
+    SignInSignUpServlet signInSignUpServlet = new SignInSignUpServlet();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,7 +65,8 @@ public class OrderServlet extends HttpServlet {
             for (Pet p : petsListCart) {
                 if (p.getId() == id) {
                     check = false;
-                    System.out.println("Pet đã có trong giỏ hàng!");
+                    JOptionPane.showMessageDialog(null,"Pet đã có trong giỏ hàng!","Thông báo",
+                            JOptionPane.INFORMATION_MESSAGE);
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/homeCustomer.jsp");
                     requestDispatcher.forward(request, response);
                     break;
@@ -123,14 +125,6 @@ public class OrderServlet extends HttpServlet {
         } else {
             showCart(request, response);
         }
-//        for (Pet pet : petsListCart) {
-//            if (pet.getId() == id) {
-//                petsListCart.remove(pet);
-//                break;
-//            }
-//        }
-//        session.setAttribute("petsListCart", petsListCart);
-//        showCart(request,response);
     }
 
     public void deleteAllCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -149,10 +143,6 @@ public class OrderServlet extends HttpServlet {
         } else {
             showCart(request, response);
         }
-//        petsListCart.clear();
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/homeCustomer.jsp");
-//        session.setAttribute("petsListCart", petsListCart);
-//        requestDispatcher.forward(request,response);
     }
 
     public void order(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -167,21 +157,27 @@ public class OrderServlet extends HttpServlet {
                 JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             order.setStatus("Paid");
-        }
-        orderManager.create(order);
-        Order order1 = orderManager.findOrderNew();
-        for (Pet pet : petsListCart) {
-            OrderDetail orderDetail = new OrderDetail(pet, order1);
-            orderDetailManager.create(orderDetail);
+            JOptionPane.showMessageDialog(null, "Cảm ơn bạn đã mua hàng!", "Thanh toán",
+                    JOptionPane.INFORMATION_MESSAGE);
+            orderManager.create(order);
+            Order order1 = orderManager.findOrderNew();
+            for (Pet pet : petsListCart) {
+                OrderDetail orderDetail = new OrderDetail(pet, order1);
+                orderDetailManager.create(orderDetail);
+                petManager.updatePetAfterBuy(pet);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Hãy thanh toán sớm trước khi đơn hàng bị hủy!", "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
+            orderManager.create(order);
+            Order order1 = orderManager.findOrderNew();
+            for (Pet pet : petsListCart) {
+                OrderDetail orderDetail = new OrderDetail(pet, order1);
+                orderDetailManager.create(orderDetail);
+            }
         }
         petsListCart.clear();
         session.setAttribute("petsListCart", petsListCart);
-        response.sendRedirect("homeCustomer.jsp");
-//        orderManager.create(order);
-//        for (Pet pet : petsListCart) {
-//            OrderDetail orderDetail = new OrderDetail(pet, order);
-//            orderDetailManager.create(orderDetail);
-//        }
-//        response.sendRedirect("homeCustomer.jsp");
+        signInSignUpServlet.displayCustomer(request,response,customer);
     }
 }

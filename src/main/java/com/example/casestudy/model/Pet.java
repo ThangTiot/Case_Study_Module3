@@ -11,6 +11,7 @@ public class Pet {
     private PetSpecial special;
     private String image;
     private String status = "Available";
+    private int check = 1;
 
     public Pet() {
     }
@@ -89,6 +90,15 @@ public class Pet {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getCheck() {
+        return check;
+    }
+
+    public void setCheck(int check) {
+        this.check = check;
+    }
+
     public String getPriceString() {
         int a = price;
         Locale locale = new Locale("vi", "VN");
