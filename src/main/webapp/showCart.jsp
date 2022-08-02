@@ -12,7 +12,7 @@
     <title>Cart</title>
 </head>
 <body>
-<c:if test="${petsListCart} != "
+<c:if test="${petsListCart != null}">
 <table border="1" width="800px">
     <tr>
         <th>ID</th>
@@ -41,6 +41,10 @@
     </tr>
 </table>
 <a style="text-decoration: none" href="/OrderServlet?action=deleteAllCart">Delete All Cart</a>
+</c:if>
+<c:if test="${petsListCart == null}">
+    <h3>Bạn chưa mua sản phẩm nào!</h3>
+</c:if>
 <br>
 <a style="text-decoration: none" href="/homeCustomer.jsp">Continue Shopping</a>
 </body>

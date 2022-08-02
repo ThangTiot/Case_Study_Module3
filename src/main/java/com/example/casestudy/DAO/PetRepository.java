@@ -40,7 +40,11 @@ public class PetRepository implements CRUDRepository<Pet>{
                 PetSpecial special = petSpecialManager.findById(petSpecialId);
                 if (check == 1) {
                     Pet pet = new Pet(id, petName, age, price, special, image, petStatus);
-                    petList.add(pet);
+                    if (petStatus.equals("Sold")) {
+                        petList.add(petList.size(), pet);
+                    } else {
+                        petList.add(0, pet);
+                    }
                 }
             }
         } catch (SQLException e) {

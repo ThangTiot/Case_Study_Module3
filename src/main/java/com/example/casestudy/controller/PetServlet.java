@@ -40,7 +40,7 @@ public class PetServlet extends HttpServlet {
                 deletePetSpecialGet(request, response);
                 break;
             default:
-                signInSignUpServlet.displayAdmin(request, response);
+                display(request, response);
                 break;
         }
 
@@ -90,7 +90,7 @@ public class PetServlet extends HttpServlet {
             }
             if (check) {
                 petManager.create(pet);
-                response.sendRedirect("/PetServlet?action=");
+                response.sendRedirect("/PetServlet?action=default");
             } else {
                 request.setAttribute("p", pet);
                 createPetGet(request, response);
@@ -115,17 +115,14 @@ public class PetServlet extends HttpServlet {
             String petSpecialNameFailMessage = "Tên loài đã tồn tại!";
             request.setAttribute("petSpecialNameFailMessage", petSpecialNameFailMessage);
             request.setAttribute("petSpecialNameFailValue", special);
+            request.setAttribute("createSpeciesMessage", "createSpeciesMessage");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
             requestDispatcher.forward(request, response);
         } else {
             PetSpecial petSpecial = new PetSpecial(special);
             petSpecialManager.create(petSpecial);
-            HttpSession session = request.getSession();
-            ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
-            session.setAttribute("petSpecials", petSpecials);
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("/PetServlet?action=default");
         }
-
     }
 
     public void deletePetSpecialGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -137,11 +134,8 @@ public class PetServlet extends HttpServlet {
                 JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             petSpecialManager.deleteById(id);
-            HttpSession session = request.getSession();
-            ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
-            session.setAttribute("petSpecials", petSpecials);
         }
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("/PetServlet?action=default");
     }
 
     public void updatePetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -193,5 +187,15 @@ public class PetServlet extends HttpServlet {
             petManager.deleteById(id);
         }
         response.sendRedirect("/PetServlet?action=default");
+    }
+
+    public void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        ArrayList<Pet> pets = petManager.findAll();
+        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
+        session.setAttribute("pets", pets);
+        session.setAttribute("petSpecials", petSpecials);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
+        requestDispatcher.forward(request,response);
     }
 }

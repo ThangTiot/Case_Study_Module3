@@ -9,41 +9,107 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Home Customer</title>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <link rel="icon" href="assets/img/favicon.png"/>
+    <link rel="stylesheet" href="assets/style/hero.css">
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="assets/style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <title>Shop Customer</title>
 </head>
 <body>
-<h1>Welcome Home Customer</h1>
-<h1>List Product</h1>
-<button style="margin-bottom: 10px"><a style="text-decoration: none" href="/LoginServlet?action=logOut">LogOut</a></button>
-<button style="margin-bottom: 10px"><a style="text-decoration: none" href="/OrderServlet?action=showCart">Show cart</a></button>
-<table border="1" width="800px">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>AGE</th>
-        <th>PRICE</th>
-        <th>SPECIAL</th>
-        <th>IMAGE</th>
-        <th>STATUS</th>
-        <th colspan="3">Action</th>
-    </tr>
-    <c:forEach items="${pets}" var="p">
-        <tr style="display: ">
-            <td>${p.getId()}</td>
-            <td>${p.getName()}</td>
-            <td>${p.getAge()}</td>
-            <td>${p.getPriceString()}</td>
-            <td>${p.getSpecial().getName()}</td>
-            <td><img style="width: 100px; height: 100px" src="${p.getImage()}" alt="${p.getImage()}"></td>
-            <td>${p.getStatus()}</td>
-            <c:if test="${p.getStatus() eq 'Sold'}">
-            <td><button disabled>AddToCart</button></td>
-            </c:if>
-            <c:if test="${p.getStatus() eq 'Available'}">
-                <td><button><a style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a></button></td>
-            </c:if>
-        </tr>
-    </c:forEach>
-</table>
+<section class="hero_shop">
+    <div class="header">
+        <header class="header_header">
+            <div class="header_logo">
+                <a href="#">
+        <span>
+            <img src="assets/img/logo.png" alt="">
+        </span>
+                </a>
+            </div>
+            <div class="header_info">
+                <nav class="header_nav">
+                    <a class="header_nav_link" href="homePage.jsp">
+                        <span>
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                        Home
+                    </a>
+                    <a class="header_nav_link" href="#">
+                        <span>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        Services
+                    </a>
+                    <a class="header_nav_link" href="#">
+                        <span>
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                        </span>
+                        Shop
+                    </a>
+                </nav>
+                <div class="user-account">
+                    <div class="user-cart">
+                        <a class="user-name" href="/OrderServlet?action=showCart">
+                            <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px;"></i>
+                            YOUR CART</a>
+                    </div>
+                    <div class="user-info">
+                        <a id="user-name" class="user-name" style="padding-right: 10px;">
+                            <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
+                            ${customer.getUsername().toUpperCase()}</a>
+                        <a href="/LoginServlet?action=logOut" class="user-name">
+                            <i class="fas fa-sign-out-alt" style="font-size: 25px; padding-right: 5px;"></i>
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="hero__body__shop">
+            <h1 class="hero__heading__shop">Online Store</h1>
+        </div>
+    </div>
+</section>
+<div class="shop_container">
+    <div class="categories">
+        <div class="list">
+            <h2 class="heading">Category List</h2>
+            <form class="pet_species" method="post" action="#">
+                <c:forEach items="${petSpecials}" var="sp">
+                    <label><input type="checkbox" class="choose" name="checkbox" value="${sp.getId()}">
+                            ${sp.getName()}</label><br>
+                </c:forEach>
+                <br>
+                <input type="submit" name="Search">
+            </form>
+        </div>
+    </div>
+    <div class="shopping-list">
+
+        <c:forEach items="${pets}" var="p">
+            <div class="column column-1-6" style="width: 250px; height: 425px">
+                <img src="${p.getImage()}" alt="${p.getImage()}" style="width: 200px; height: 200px">
+                <p>${p.getName()} (${p.getAge()} tuổi)</p>
+                <p>${p.getSpecial().getName()}</p>
+                <p>${p.getPriceString()}</p>
+                <p>${p.getStatus()}</p>
+                <c:if test="${p.getStatus() eq 'Sold'}">
+                    <button hidden>AddToCart</button>
+                </c:if>
+                <c:if test="${p.getStatus() eq 'Available'}">
+                    <a class="product-cart" style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a>
+                </c:if>
+            </div>
+        </c:forEach>
+
+    </div>
+</div>
 </body>
 </html>

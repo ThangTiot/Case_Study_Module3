@@ -138,7 +138,7 @@ public class OrderServlet extends HttpServlet {
         if (result == JOptionPane.YES_OPTION) {
             petsListCart.clear();
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/homeCustomer.jsp");
-            session.setAttribute("petsListCart", petsListCart);
+            session.setAttribute("petsListCart", null);
             requestDispatcher.forward(request, response);
         } else {
             showCart(request, response);

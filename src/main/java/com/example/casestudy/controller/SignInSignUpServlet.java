@@ -134,9 +134,11 @@ public class SignInSignUpServlet extends HttpServlet {
     }
     public void displayCustomer(HttpServletRequest request, HttpServletResponse response, Customer customer) throws ServletException, IOException {
         ArrayList<Pet> pets = petManager.findAll();
+        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
         HttpSession session = request.getSession();
         session.setAttribute("pets", pets);
         session.setAttribute("customer", customer);
+        session.setAttribute("petSpecials", petSpecials);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("homePage.jsp");
         requestDispatcher.forward(request,response);
     }

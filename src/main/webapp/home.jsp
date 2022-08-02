@@ -56,10 +56,10 @@
                 </nav>
                 <div class="user-account">
                     <div class="user-info">
-                        <a id="user-name" class="user-name" href="#" style="padding-right: 10px;">
+                        <a id="user-name" class="user-name" style="padding-right: 10px;">
                             <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
                             ADMIN</a>
-                        <a href="#" class="user-name">
+                        <a href="/LoginServlet?action=logOut" class="user-name">
                             <i class="fas fa-sign-out-alt" style="font-size: 25px; padding-right: 5px;"></i>
                             Log Out
                         </a>
@@ -79,6 +79,7 @@
             <h2 class="heading">Category List</h2>
             <a href="/PetServlet?action=creatPetSpecialGet" class="species_add"> Add new Species </a>
             <c:if test="${createSpeciesMessage != null}">
+                <div>
                 <form action="/PetServlet?action=creatPetSpecialPost" class="form_create" method="post">
                     <label class="form-name">Pet Species Name</label>
                     <input name="special" placeholder="Enter Pet Species Name" class="form-control" type="text"
@@ -86,7 +87,9 @@
                     <p style="color: red; margin: 0">${petSpecialNameFailMessage}</p>
                     <button type="submit" class="form-btn" style="width: 50px;height: 30px">Add</button>
                 </form>
+                </div>
             </c:if>
+            <div>
             <form class="pet_species" method="post" action="#">
                 <c:forEach items="${petSpecials}" var="sp">
                     <label><input type="checkbox" class="choose" name="checkbox" value="${sp.getId()}">
@@ -94,102 +97,31 @@
                     <button><a style="text-decoration: none" href="/PetServlet?action=deletePetSpecialGet&id=${sp.getId()}">Delete</a></button><br>
                 </c:forEach>
                 <br>
-                <input type="submit">
+                <input type="submit" name="Search">
             </form>
+            </div>
         </div>
     </div>
     <div class="shopping-list">
 
-        <div class="column column-1-6">
-            <img src="https://via.placeholder.com/200x195/588CC7/E6EEF6" alt="">
-            <p>Pet name</p>
-            <p> price</p>
-            <a href="#" class="product-cart">Add to cart</a>
+<c:forEach items="${pets}" var="p">
+        <div class="column column-1-6" style="width: 250px; height: 425px">
+            <img src="${p.getImage()}" alt="${p.getImage()}" style="width: 200px; height: 200px">
+            <p>${p.getName()} (${p.getAge()} tuổi)</p>
+            <p>${p.getSpecial().getName()}</p>
+            <p>${p.getPriceString()}</p>
+            <p>${p.getStatus()}</p>
             <br>
             <span class="admin_icon">
-                <a href="#" class="product-edit">
+                <a href="/PetServlet?action=updatePetGet&id=${p.getId()}" class="product-edit">
          <i class="fas fa-edit"></i>
        </a>
-                <a href="#" class="product-delete">
+                <a href="/PetServlet?action=deletePetGet&id=${p.getId()}" class="product-delete">
         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
         </span>
         </div>
-        <div class="column column-1-6">
-            <img src="https://via.placeholder.com/200x195/588CC7/E6EEF6" alt="">
-            <p>Pet name</p>
-            <p> price</p>
-            <a href="#" class="product-cart">Add to cart</a>
-            <br>
-            <span class="admin_icon">
-                <a href="#" class="product-edit">
-         <i class="fas fa-edit"></i>
-       </a>
-                <a href="#" class="product-delete">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-        </span>
-        </div>
-        <div class="column column-1-6">
-            <img src="https://via.placeholder.com/200x195/588CC7/E6EEF6" alt="">
-            <p>Pet name</p>
-            <p> price</p>
-            <a href="#" class="product-cart">Add to cart</a>
-            <br>
-            <span class="admin_icon">
-                <a href="#" class="product-edit">
-         <i class="fas fa-edit"></i>
-       </a>
-                <a href="#" class="product-delete">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-        </span>
-        </div>
-        <div class="column column-1-6">
-            <img src="https://via.placeholder.com/200x195/588CC7/E6EEF6" alt="">
-            <p>Pet name</p>
-            <p> price</p>
-            <a href="#" class="product-cart">Add to cart</a>
-            <br>
-            <span class="admin_icon">
-                <a href="#" class="product-edit">
-         <i class="fas fa-edit"></i>
-       </a>
-                <a href="#" class="product-delete">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-        </span>
-        </div>
-        <div class="column column-1-6">
-            <img src="https://via.placeholder.com/200x195/588CC7/E6EEF6" alt="">
-            <p>Pet name</p>
-            <p> price</p>
-            <a href="#" class="product-cart">Add to cart</a>
-            <br>
-            <span class="admin_icon">
-                <a href="#" class="product-edit">
-         <i class="fas fa-edit"></i>
-       </a>
-                <a href="#" class="product-delete">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-        </span>
-        </div>
-        <div class="column column-1-6">
-            <img src="https://via.placeholder.com/200x195/588CC7/E6EEF6" alt="">
-            <p>Pet name</p>
-            <p> price</p>
-            <a href="#" class="product-cart">Add to cart</a>
-            <br>
-            <span class="admin_icon">
-                <a href="#" class="product-edit">
-         <i class="fas fa-edit"></i>
-       </a>
-                <a href="#" class="product-delete">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
-        </span>
-        </div>
+</c:forEach>
 
     </div>
 </div>

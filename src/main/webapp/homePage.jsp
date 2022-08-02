@@ -77,12 +77,6 @@
 
                 </nav>
                 <div class="user-account">
-                    <div class="user-cart">
-                        <a class="user-name" href="/OrderServlet?action=showCart" >
-                            <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 30px;"></i>
-                            YOUR CART</a>
-
-                    </div>
                     <div class="user-info">
                         <c:if test="${admin != null}">
                         <a id="user-name" class="user-name" style="padding-right: 10px;">
