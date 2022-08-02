@@ -52,4 +52,8 @@ public class PetManager implements CRUDService<Pet>{
     public void updatePetAfterBuy(Pet pet) {
         petRepository.updatePetAfterBuy(pet);
     }
+
+    public ArrayList<Pet> findPetBySpecies(int petSpecialId) {
+        return petRepository.findPetBySpecies(petSpecialId);
+    }
 }

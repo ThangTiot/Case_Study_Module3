@@ -20,6 +20,7 @@ public class PetRepository implements CRUDRepository<Pet>{
     private final String UPDATE_PET_BT_ID = "update pet set petName = ? , age = ? , price = ? , petSpecialId = ? , " +
             "image = ? , petStatus = ? where id = ?";
     private final String UPDATE_PET_AFTER_BUY = "update pet set petStatus = ? where id = ?";
+    private final String SELECT_PETS_BY_SPECIES= "select * from pet where petspecial = ?";
 
     @Override
     public ArrayList<Pet> findAll() {
@@ -109,5 +110,36 @@ public class PetRepository implements CRUDRepository<Pet>{
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+    }
+    public ArrayList<Pet> findPetBySpecies(int petSpecialId) {
+        ArrayList<Pet> petList = new ArrayList<>();
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PETS_BY_SPECIES);
+            preparedStatement.setInt(1,petSpecialId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String petName = resultSet.getString("petName");
+                String age = resultSet.getString("age");
+                int price = resultSet.getInt("price");
+                int petSpecialId1 = resultSet.getInt("petSpecialId");
+                String image = "\\image\\" + resultSet.getString("image");
+                String petStatus = resultSet.getString("petStatus");
+                int check = resultSet.getInt("checkDelete");
+                PetSpecial special = petSpecialManager.findById(petSpecialId1);
+                if (check == 1) {
+                    Pet pet = new Pet(id, petName, age, price, special, image, petStatus);
+                    if (petStatus.equals("Sold")) {
+                        petList.add(petList.size(), pet);
+                    } else {
+                        petList.add(0, pet);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return petList;
     }
 }

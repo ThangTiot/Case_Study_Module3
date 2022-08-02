@@ -2,7 +2,7 @@ create database case_study_md3;
 
 use case_study_md3;
 
-create table Customer(
+create table customer(
 id int auto_increment primary key,
 username varchar(50) not null,
 pass varchar(50) not null,
@@ -11,30 +11,28 @@ mail varchar(50),
 address varchar(90)
 );
 
-create table petSpecial(
+create table petspecial(
 id int auto_increment primary key,
 special varchar(50),
-checkDelete int 
+checkDelete int not null
 );
 
 create table pet(
 id int auto_increment primary key,
 petName varchar(50),
-age varchar(2) not null,
+age varchar(2),
 price int not null,
 petSpecialId int not null,
-foreign key (petSpecialId) references petSpecial (id),
-image varchar(500),
+foreign key (petSpecialId) references petspecial (id),
+image varchar(100),
 petStatus varchar(50),
-checkDelete int
+checkDelete int not null
 );
-
-
 
 create table ordercustomer(
 id int auto_increment primary key,
 customerId int not null,
-foreign key (customerId) references Customer (id),
+foreign key (customerId) references customer (id),
 dateCreateOrder date not null,
 orderStatus varchar(50) not null
 );

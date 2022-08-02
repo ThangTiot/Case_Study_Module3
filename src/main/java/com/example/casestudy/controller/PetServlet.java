@@ -59,6 +59,9 @@ public class PetServlet extends HttpServlet {
             case "updatePetPost":
                 updatePetPost(request, response);
                 break;
+            case "findPetBySpeciesPost":
+                findPetBySpeciesPost(request, response);
+                break;
         }
     }
 
@@ -197,5 +200,13 @@ public class PetServlet extends HttpServlet {
         session.setAttribute("petSpecials", petSpecials);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
         requestDispatcher.forward(request,response);
+    }
+
+    public void findPetBySpeciesPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int idSpecial = Integer.parseInt(request.getParameter("checkbox"));
+        ArrayList<Pet> pets = petManager.findPetBySpecies(idSpecial);
+        HttpSession session = request.getSession();
+        session.setAttribute("pets", pets);
+        response.sendRedirect("home.jsp");
     }
 }
