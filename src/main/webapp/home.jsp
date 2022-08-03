@@ -56,7 +56,7 @@
                 </nav>
                 <div class="user-account">
                     <div class="user-info">
-                        <a id="user-name" class="user-name" style="padding-right: 10px;">
+                        <a id="user-name" class="user-name" style="padding-right: 10px;" href="/OrderServlet?action=showOrderHistoryAdmin">
                             <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
                             ADMIN</a>
                         <a href="/LoginServlet?action=logOut" class="user-name">

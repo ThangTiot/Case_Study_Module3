@@ -43,6 +43,9 @@ public class OrderServlet extends HttpServlet {
                 break;
             case "order":
                 order(request, response);
+            case "showOrderHistoryAdmin":
+                showOrderHistoryAdmin(request, response);
+                break;
         }
     }
 
@@ -177,7 +180,16 @@ public class OrderServlet extends HttpServlet {
             }
         }
         petsListCart.clear();
+        ArrayList<Pet> pets = petManager.findAll();
+        session.setAttribute("pets", pets);
         session.setAttribute("petsListCart", petsListCart);
         response.sendRedirect("homeCustomer.jsp");
+    }
+
+    public void showOrderHistoryAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        ArrayList<Order> orders = orderManager.findAll();
+        session.setAttribute("orders", orders);
+        response.sendRedirect("showOrderAdmin.jsp");
     }
 }

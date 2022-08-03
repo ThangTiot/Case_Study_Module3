@@ -12,7 +12,9 @@ import java.util.ArrayList;
 
 public class OrderRepository implements CRUDRepository<Order>{
     private final String CREATE_ORDER = "insert into ordercustomer(customerId, dateCreateOrder, orderStatus) values (?,?,?)";
-    private final String SELECT_ALL_ORDER = "select * from ordercustomer";
+    private final String SELECT_ALL_ORDER = "select ordercustomer.id, customer.id, ordercustomer.dateCreateOrder, ordercustomer.orderStatus\n" +
+            ", sum(pet.price) as total from ordercustomer join ordercustomerdetail on ordercustomer.id = ordercustomerdetail.orderCustomerId\n" +
+            "join pet on ordercustomerdetail.petId = pet.id join customer on ordercustomer.customerId = customer.id group by ordercustomer.id";
     private final String SELECT_ORDER_NEW = "select * from ordercustomer where id = (select max(id) from ordercustomer)";
 
     private final MyConnection myConnection = new MyConnection();
@@ -25,13 +27,14 @@ public class OrderRepository implements CRUDRepository<Order>{
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ORDER);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                int idCustomer = resultSet.getInt("customerId");
+                int id = resultSet.getInt(1);
+                int idCustomer = resultSet.getInt(2);
                 Date date = resultSet.getDate("dateCreateOrder");
                 String status = resultSet.getString("orderStatus");
+                int totalOrder = Integer.parseInt(resultSet.getString("total"));
                 Customer customer = customerManager.findById(idCustomer);
                 LocalDate dateCreateOrder = LocalDate.parse(date.toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                Order order = new Order(id,customer,dateCreateOrder,status);
+                Order order = new Order(id,customer,dateCreateOrder,status,totalOrder);
                 orders.add(order);
             }
         } catch (SQLException e) {

@@ -26,6 +26,14 @@ public class Order {
         this.status = status;
     }
 
+    public Order(int id, Customer customer, LocalDate dateCreateOrder, String status, int totalOrder) {
+        this.id = id;
+        this.customer = customer;
+        this.dateCreateOrder = dateCreateOrder;
+        this.status = status;
+        this.totalOrder = totalOrder;
+    }
+
     public int getId() {
         return id;
     }

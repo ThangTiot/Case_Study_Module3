@@ -102,7 +102,7 @@
                 <p class="pet_info">${p.getStatus()}</p>
                 <br>
                 <c:if test="${p.getStatus() eq 'Sold'}">
-                    <button hidden>AddToCart</button>
+                    <button disabled style="height: 30px">Add To Cart <i class="fas fa-cart-plus"></i></button>
                 </c:if>
                 <c:if test="${p.getStatus() eq 'Available'}">
                     <a class="product-cart" style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}"> Add To Cart
