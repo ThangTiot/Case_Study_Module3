@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <link rel="stylesheet" href="CSS/SignIn_SignUp.css">
+    <link rel="stylesheet" href="assets/style/SignIn_SignUp.css">
     <link rel="icon" href="assets/img/favicon.png"/>
     <title>LogIn</title>
 </head>
