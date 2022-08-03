@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class OrderRepository implements CRUDRepository<Order>{
     private final String CREATE_ORDER = "insert into ordercustomer(customerId, dateCreateOrder, orderStatus) values (?,?,?)";
     private final String SELECT_ALL_ORDER = "CALL findAllOrder();";
+    private final String DELETE_ORDER_BY_ID = "call deleteOrderById(?)";
     private final String SELECT_ORDER_NEW = "select * from ordercustomer where id = (select max(id) from ordercustomer)";
 
     private final MyConnection myConnection = new MyConnection();
@@ -57,7 +58,14 @@ public class OrderRepository implements CRUDRepository<Order>{
 
     @Override
     public void deleteById(int id) {
-
+        try {
+            Connection connection = myConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ORDER_BY_ID);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public Order findOrderNew() {

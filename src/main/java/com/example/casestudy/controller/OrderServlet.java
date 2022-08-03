@@ -43,8 +43,12 @@ public class OrderServlet extends HttpServlet {
                 break;
             case "order":
                 order(request, response);
+                break;
             case "showOrderHistoryAdmin":
                 showOrderHistoryAdmin(request, response);
+                break;
+            case "deleteOrderById":
+                deleteOrderById(request, response);
                 break;
         }
     }
@@ -192,4 +196,18 @@ public class OrderServlet extends HttpServlet {
         session.setAttribute("orders", orders);
         response.sendRedirect("showOrderAdmin.jsp");
     }
+
+    public void deleteOrderById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int result = JOptionPane.showConfirmDialog(null,
+                "Bạn có muốn xóa không?",
+                "Xác nhận",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+            orderManager.deleteById(id);
+        }
+        response.sendRedirect("/OrderServlet?action=showOrderHistoryAdmin");
+    }
+
 }

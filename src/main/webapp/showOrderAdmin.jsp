@@ -88,7 +88,9 @@
                     <td>${o.getDateCreateOrder()}</td>
                     <td>${o.getStatus()}</td>
                     <td>${o.getTotalString()}</td>
+                    <c:if test="${o.getStatus() eq 'Unpaid'}">
                     <td><button><a style="text-decoration: none" href="/OrderServlet?action=deleteCart&id=${o.getId()}"> <i class="fa fa-trash" aria-hidden="true"></i></a></button></td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </table>

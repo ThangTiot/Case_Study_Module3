@@ -41,7 +41,7 @@ public class OrderManager implements CRUDService<Order>{
 
     @Override
     public void deleteById(int id) {
-
+        orderRepository.deleteById(id);
     }
 
     public Order findOrderNew() {
