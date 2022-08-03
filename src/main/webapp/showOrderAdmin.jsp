@@ -37,7 +37,7 @@
                     <td>${o.getDateCreateOrder()}</td>
                     <td>${o.getStatus()}</td>
                     <td>${o.getTotalString()}</td>
-                    <td><button><a style="text-decoration: none" href="/OrderServlet?action=deleteCart&id=${p.getId()}"> <i class="fa fa-trash" aria-hidden="true"></i></a></button></td>
+                    <td><button><a style="text-decoration: none" href="/OrderServlet?action=deleteCart&id=${o.getId()}"> <i class="fa fa-trash" aria-hidden="true"></i></a></button></td>
                 </tr>
             </c:forEach>
         </table>

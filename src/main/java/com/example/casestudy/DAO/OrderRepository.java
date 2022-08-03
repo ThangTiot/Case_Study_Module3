@@ -12,9 +12,7 @@ import java.util.ArrayList;
 
 public class OrderRepository implements CRUDRepository<Order>{
     private final String CREATE_ORDER = "insert into ordercustomer(customerId, dateCreateOrder, orderStatus) values (?,?,?)";
-    private final String SELECT_ALL_ORDER = "select ordercustomer.id, customer.id, ordercustomer.dateCreateOrder, ordercustomer.orderStatus\n" +
-            ", sum(pet.price) as total from ordercustomer join ordercustomerdetail on ordercustomer.id = ordercustomerdetail.orderCustomerId\n" +
-            "join pet on ordercustomerdetail.petId = pet.id join customer on ordercustomer.customerId = customer.id group by ordercustomer.id";
+    private final String SELECT_ALL_ORDER = "CALL findAllOrder();";
     private final String SELECT_ORDER_NEW = "select * from ordercustomer where id = (select max(id) from ordercustomer)";
 
     private final MyConnection myConnection = new MyConnection();
@@ -59,6 +57,7 @@ public class OrderRepository implements CRUDRepository<Order>{
 
     @Override
     public void deleteById(int id) {
+
     }
 
     public Order findOrderNew() {

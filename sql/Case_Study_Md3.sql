@@ -69,4 +69,13 @@ quantity int,
 primary key (serviceId, orderCustomerServiceId)
 );
 
+DELIMITER //
+DROP PROCEDURE IF EXISTS findAllOrder;
+CREATE PROCEDURE findAllOrder()
+BEGIN
+   select ordercustomer.id, customer.id, ordercustomer.dateCreateOrder, ordercustomer.orderStatus
+, sum(pet.price) as total from ordercustomer join ordercustomerdetail on ordercustomer.id = ordercustomerdetail.orderCustomerId
+join pet on ordercustomerdetail.petId = pet.id join customer on ordercustomer.customerId = customer.id group by ordercustomer.id;
+END //
+DELIMITER ;
 
