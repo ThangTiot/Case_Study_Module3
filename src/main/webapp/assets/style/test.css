@@ -16,3 +16,6 @@ body{
     font-size: 30px;
     font-weight: 400;
 }
+th{
+    padding:5px;
+}
