@@ -200,7 +200,7 @@ public class OrderServlet extends HttpServlet {
     public void deleteOrderById(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         int result = JOptionPane.showConfirmDialog(null,
-                "Bạn có muốn xóa không?",
+                "Bạn có muốn hủy đơn hàng này không?",
                 "Xác nhận",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
