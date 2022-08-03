@@ -67,7 +67,7 @@ public class PetServlet extends HttpServlet {
     }
 
     public void createPetGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("pet/createPet.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pet/createPet.jsp");
 //        ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
 //        request.setAttribute("petSpecials", petSpecials);
         requestDispatcher.forward(request, response);

@@ -92,7 +92,6 @@ public class OrderServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/homeCustomer.jsp");
             session.setAttribute("petsListCart", petsListCart);
             requestDispatcher.forward(request, response);
-            System.out.println("Them vao gio hang thanh cong!");
         }
     }
 
