@@ -20,7 +20,7 @@ public class PetRepository implements CRUDRepository<Pet>{
     private final String UPDATE_PET_BT_ID = "update pet set petName = ? , age = ? , price = ? , petSpecialId = ? , " +
             "image = ? , petStatus = ? where id = ?";
     private final String UPDATE_PET_AFTER_BUY = "update pet set petStatus = ? where id = ?";
-    private final String SELECT_PETS_BY_SPECIES= "select * from pet where petspecial = ?";
+    private final String SELECT_PETS_BY_SPECIES= "select * from pet where petSpecialId = ?";
 
     @Override
     public ArrayList<Pet> findAll() {

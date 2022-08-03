@@ -1,6 +1,7 @@
 package com.example.casestudy.controller;
 
 import com.example.casestudy.Verified.VerifiedPet.VerifiedPet;
+import com.example.casestudy.model.Customer;
 import com.example.casestudy.model.Pet;
 import com.example.casestudy.model.PetSpecial;
 import com.example.casestudy.service.PetManager;
@@ -138,6 +139,10 @@ public class PetServlet extends HttpServlet {
         if (result == JOptionPane.YES_OPTION) {
             petSpecialManager.deleteById(id);
         }
+        ArrayList<Pet> pets = petManager.findPetBySpecies(id);
+        for (Pet pet : pets) {
+            petManager.deleteById(pet.getId());
+        }
         response.sendRedirect("/PetServlet?action=default");
     }
 
@@ -198,8 +203,12 @@ public class PetServlet extends HttpServlet {
         ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
         session.setAttribute("pets", pets);
         session.setAttribute("petSpecials", petSpecials);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("home.jsp");
-        requestDispatcher.forward(request,response);
+        String admin = (String) session.getAttribute("admin");
+        if (admin != null) {
+            response.sendRedirect("home.jsp");
+        } else {
+            response.sendRedirect("homeCustomer.jsp");
+        }
     }
 
     public void findPetBySpeciesPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -207,6 +216,11 @@ public class PetServlet extends HttpServlet {
         ArrayList<Pet> pets = petManager.findPetBySpecies(idSpecial);
         HttpSession session = request.getSession();
         session.setAttribute("pets", pets);
-        response.sendRedirect("home.jsp");
+        String admin = (String) session.getAttribute("admin");
+        if (admin != null) {
+            response.sendRedirect("home.jsp");
+        } else {
+            response.sendRedirect("homeCustomer.jsp");
+        }
     }
 }

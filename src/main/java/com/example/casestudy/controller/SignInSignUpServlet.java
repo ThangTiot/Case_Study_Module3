@@ -37,6 +37,12 @@ public class SignInSignUpServlet extends HttpServlet {
                 session.invalidate();
                 response.sendRedirect("SignIN_SignUp.jsp");
                 break;
+            case "displayAdmin":
+                displayAdmin(request, response);
+                break;
+            case "displayCustomer":
+                displayCustomer(request, response);
+                break;
         }
     }
 
@@ -57,10 +63,12 @@ public class SignInSignUpServlet extends HttpServlet {
         String userName = request.getParameter("usrName");
         String password = request.getParameter("psw");
         if (userName.equals("admin") && password.equals("admin")) {
-            displayAdmin(request,response);
+            response.sendRedirect("/LoginServlet?action=displayAdmin");
         } else if (customerManager.checkCustomerExist(userName, password) != null) {
             Customer customer = customerManager.checkCustomerExist(userName, password);
-            displayCustomer(request,response,customer);
+            HttpSession session = request.getSession();
+            session.setAttribute("customer", customer);
+            response.sendRedirect("/LoginServlet?action=displayCustomer");
         } else {
             String failMassage = "Username or password is incorrect!";
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIN_SignUp.jsp");
@@ -132,12 +140,11 @@ public class SignInSignUpServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("homePage.jsp");
         requestDispatcher.forward(request,response);
     }
-    public void displayCustomer(HttpServletRequest request, HttpServletResponse response, Customer customer) throws ServletException, IOException {
+    public void displayCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Pet> pets = petManager.findAll();
         ArrayList<PetSpecial> petSpecials = petSpecialManager.findAll();
         HttpSession session = request.getSession();
         session.setAttribute("pets", pets);
-        session.setAttribute("customer", customer);
         session.setAttribute("petSpecials", petSpecials);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("homePage.jsp");
         requestDispatcher.forward(request,response);

@@ -47,7 +47,7 @@
                         </span>
                         Services
                     </a>
-                    <a class="header_nav_link" href="#">
+                    <a class="header_nav_link" href="/PetServlet?action=default">
                         <span>
                             <i class="fa fa-bell" aria-hidden="true"></i>
                         </span>
@@ -81,13 +81,13 @@
     <div class="categories">
         <div class="list">
             <h2 class="heading">Category List</h2>
-            <form class="pet_species" method="post" action="#">
+            <form class="pet_species" method="post" action="/PetServlet?action=findPetBySpeciesPost">
                 <c:forEach items="${petSpecials}" var="sp">
                     <label><input type="checkbox" class="choose" name="checkbox" value="${sp.getId()}">
                             ${sp.getName()}</label><br>
                 </c:forEach>
                 <br>
-                <input type="submit" name="Search">
+                <input type="submit" value="Search">
             </form>
         </div>
     </div>

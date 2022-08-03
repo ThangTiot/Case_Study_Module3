@@ -178,6 +178,6 @@ public class OrderServlet extends HttpServlet {
         }
         petsListCart.clear();
         session.setAttribute("petsListCart", petsListCart);
-        signInSignUpServlet.displayCustomer(request,response,customer);
+        response.sendRedirect("homeCustomer.jsp");
     }
 }

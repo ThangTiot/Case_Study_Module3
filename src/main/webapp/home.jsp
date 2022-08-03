@@ -47,7 +47,7 @@
                         </span>
                         Services
                     </a>
-                    <a class="header_nav_link" href="#">
+                    <a class="header_nav_link" href="/PetServlet?action=default">
                         <span>
                             <i class="fa fa-bell" aria-hidden="true"></i>
                         </span>
@@ -80,42 +80,43 @@
             <a href="/PetServlet?action=creatPetSpecialGet" class="species_add"> Add new Species </a>
             <c:if test="${createSpeciesMessage != null}">
                 <div>
-                <form action="/PetServlet?action=creatPetSpecialPost" class="form_create" method="post">
-                    <label class="form-name">Pet Species Name</label>
-                    <input name="special" placeholder="Enter Pet Species Name" class="form-control" type="text"
-                           value="${petSpecialNameFailValue}">
-                    <p style="color: red; margin: 0">${petSpecialNameFailMessage}</p>
-                    <button type="submit" class="form-btn" style="width: 50px;height: 30px">Add</button>
-                </form>
+                    <form action="/PetServlet?action=creatPetSpecialPost" class="form_create" method="post">
+                        <label class="form-name">Pet Species Name</label>
+                        <input name="special" placeholder="Enter Pet Species Name" class="form-control" type="text"
+                               value="${petSpecialNameFailValue}">
+                        <p style="color: red; margin: 0">${petSpecialNameFailMessage}</p>
+                        <button type="submit" class="form-btn" style="width: 50px;height: 30px">Add</button>
+                    </form>
                 </div>
             </c:if>
             <div>
-            <form class="pet_species" method="post" action="#">
-                <c:forEach items="${petSpecials}" var="sp">
-                    <div class="categories_input">
-                    <label><input type="checkbox" class="choose" name="checkbox" value="${sp.getId()}">
-                            ${sp.getName()}</label>
-                  <a  class="species_btn" style="text-decoration: none" href="/PetServlet?action=deletePetSpecialGet&id=${sp.getId()}">
-                        <i class="fa fa-trash" aria-hidden="true"></i></a><br>
-                    </div>
-                </c:forEach>
-                <br>
-                <input type="submit" name="Search">
-            </form>
+                <form class="pet_species" method="post" action="/PetServlet?action=findPetBySpeciesPost">
+                    <c:forEach items="${petSpecials}" var="sp">
+                        <div class="categories_input">
+                            <label><input type="radio" class="choose" name="checkbox" value="${sp.getId()}">
+                                    ${sp.getName()}</label>
+                            <a class="species_btn" style="text-decoration: none"
+                               href="/PetServlet?action=deletePetSpecialGet&id=${sp.getId()}">
+                                <i class="fa fa-trash" aria-hidden="true"></i></a><br>
+                        </div>
+                    </c:forEach>
+                    <br>
+                    <input type="submit" value="Search">
+                </form>
             </div>
         </div>
     </div>
     <div class="shopping-list">
-
-<c:forEach items="${pets}" var="p">
-        <div class="column column-1-6" style="width: 250px; height: 380px">
-            <img src="${p.getImage()}" alt="${p.getImage()}" style="width: 200px; height: 200px">
-            <p class="pet_info">${p.getName()} (${p.getAge()} tuổi)</p>
-            <p class="pet_info">${p.getSpecial().getName()}</p>
-            <p class="pet_info">${p.getPriceString()}</p>
-            <p class="pet_info">${p.getStatus()}</p>
-            <br>
-            <span class="admin_icon">
+        <c:if test="${pets != null}">
+        <c:forEach items="${pets}" var="p">
+            <div class="column column-1-6" style="width: 250px; height: 380px">
+                <img src="${p.getImage()}" alt="${p.getImage()}" style="width: 200px; height: 200px">
+                <p class="pet_info">${p.getName()} (${p.getAge()} tuổi)</p>
+                <p class="pet_info">${p.getSpecial().getName()}</p>
+                <p class="pet_info">${p.getPriceString()}</p>
+                <p class="pet_info">${p.getStatus()}</p>
+                <br>
+                <span class="admin_icon">
                 <a href="/PetServlet?action=updatePetGet&id=${p.getId()}" class="product-edit">
          <i class="fas fa-edit"></i>
        </a>
@@ -123,9 +124,12 @@
         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
         </span>
-        </div>
-</c:forEach>
-
+            </div>
+        </c:forEach>
+        </c:if>
+        <c:if test="${pets == null}">
+            <h4>Không có bé Pet nào cạ!</h4>
+        </c:if>
     </div>
 </div>
 </body>
