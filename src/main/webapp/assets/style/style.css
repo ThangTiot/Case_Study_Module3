@@ -27,7 +27,7 @@ a{
     padding: 5px;
     border: 1px solid;
     border-radius: 5%;
-    background: gray;
+    /*background: gray;*/
     margin-bottom: 10px;
 }
 .user-name{
@@ -74,7 +74,7 @@ padding: 0 30px;
     padding: 5px;
     border: 1px solid;
     border-radius: 5%;
-    background: gray;
+    /*background: gray;*/
 }
 .column {
     margin: 0 10px;

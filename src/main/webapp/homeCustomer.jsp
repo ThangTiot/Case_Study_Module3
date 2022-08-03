@@ -83,7 +83,7 @@
             <h2 class="heading">Category List</h2>
             <form class="pet_species" method="post" action="/PetServlet?action=findPetBySpeciesPost">
                 <c:forEach items="${petSpecials}" var="sp">
-                    <label><input type="checkbox" class="choose" name="checkbox" value="${sp.getId()}">
+                    <label><input type="radio" class="choose" name="checkbox" value="${sp.getId()}">
                             ${sp.getName()}</label><br>
                 </c:forEach>
                 <br>
