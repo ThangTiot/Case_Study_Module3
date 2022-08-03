@@ -13,7 +13,11 @@
     <link rel="icon" href="assets/img/favicon.png"/>
     <link rel="stylesheet" href="assets/style/hero.css">
     <link rel="stylesheet" href="assets/style/style.css">
-    <link rel="stylesheet" href="assets/style/cart.css">
+    <link rel="stylesheet" href="assets/style/test.css">
+    <link rel="stylesheet" href="assets/style/footerOrder.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossorigin="anonymous"/>
@@ -101,5 +105,37 @@
     </c:if>
     <br>
 </div>
+<footer class="footer">
+    <div class="container container--footer">
+
+        <h3 class="footer--header">Project done by Boom </h3>
+        <!--            <img-->
+        <!--                    src="assets/img/logo.png"-->
+        <!--                    alt="Monticello logo"-->
+        <!--                    class="logo__img"-->
+        <!--            />-->
+        <nav class="social social--footer">
+            <ul class="social__list">
+                <li class="social__item">
+                    <a href="#" class="social__link"
+                    ><i class="fab fa-facebook-f"></i
+                    ></a>
+                </li>
+                <li class="social__item">
+                    <a href="#" class="social__link"
+                    ><i class="fab fa-twitter"></i
+                    ></a>
+                </li>
+                <li class="social__item">
+                    <a href="#" class="social__link"
+                    ><i class="fab fa-instagram"></i
+                    ></a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</footer>
+
 </body>
 </html>

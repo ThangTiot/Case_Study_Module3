@@ -11,13 +11,67 @@
 <head>
     <title>Cart</title>
     <link rel="icon" href="assets/img/favicon.png"/>
-<%--    <link rel="stylesheet" href="assets/style/cart.css">--%>
+    <link rel="stylesheet" href="assets/style/hero.css">
+    <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/test.css">
+    <link rel="stylesheet" href="assets/style/footerOrder.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossorigin="anonymous"/>
 </head>
 <body>
+<section class="hero_shop">
+    <div class="header">
+        <header class="header_header">
+            <div class="header_logo">
+                <a href="#">
+        <span>
+            <img src="assets/img/logo.png" alt="">
+        </span>
+                </a>
+            </div>
+            <div class="header_info">
+                <nav class="header_nav">
+                    <a class="header_nav_link" href="homePage.jsp">
+                        <span>
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </span>
+                        Home
+                    </a>
+                    <a class="header_nav_link" href="#">
+                        <span>
+                              <i class="fas fa-clinic-medical"></i>
+                        </span>
+                        Services
+                    </a>
+                    <a class="header_nav_link" href="/PetServlet?action=default">
+                        <span>
+                             <i class='fas fa-shopping-bag'></i>
+                        </span>
+                        Shop
+                    </a>
+                </nav>
+                <div class="user-account">
+                    <div class="user-info">
+                        <a id="user-name" class="user-name" style="padding-right: 10px;">
+                            <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
+                            ${customer.getUsername().toUpperCase()}</a>
+                        <a href="/LoginServlet?action=logOut" class="user-name">
+                            <i class="fas fa-sign-out-alt" style="font-size: 25px; padding-right: 5px;"></i>
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <%--        <div class="hero__body__shop">--%>
+        <%--            <h1 class="hero__heading__shop">Online Store</h1>--%>
+        <%--        </div>--%>
+    </div>
+</section>
+
 <div class="cart">
     <h1 class="cart-header">Your Cart</h1>
 <c:if test="${petsListCart != null}">
@@ -61,5 +115,37 @@
     <button>
 <a class="cart-btn"style="text-decoration: none" href="/homeCustomer.jsp">Continue Shopping</a></button>
 </div>
+<%--<footer class="footer">--%>
+<%--    <div class="container container--footer">--%>
+
+<%--        <h3 class="footer--header">Project done by Boom </h3>--%>
+<%--        <!--            <img-->--%>
+<%--        <!--                    src="assets/img/logo.png"-->--%>
+<%--        <!--                    alt="Monticello logo"-->--%>
+<%--        <!--                    class="logo__img"-->--%>
+<%--        <!--            />-->--%>
+<%--        <nav class="social social--footer">--%>
+<%--            <ul class="social__list">--%>
+<%--                <li class="social__item">--%>
+<%--                    <a href="#" class="social__link"--%>
+<%--                    ><i class="fab fa-facebook-f"></i--%>
+<%--                    ></a>--%>
+<%--                </li>--%>
+<%--                <li class="social__item">--%>
+<%--                    <a href="#" class="social__link"--%>
+<%--                    ><i class="fab fa-twitter"></i--%>
+<%--                    ></a>--%>
+<%--                </li>--%>
+<%--                <li class="social__item">--%>
+<%--                    <a href="#" class="social__link"--%>
+<%--                    ><i class="fab fa-instagram"></i--%>
+<%--                    ></a>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
+<%--        </nav>--%>
+
+<%--    </div>--%>
+<%--</footer>--%>
+
 </body>
 </html>

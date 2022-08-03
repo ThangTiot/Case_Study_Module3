@@ -1,6 +1,9 @@
 body{
     background :#0CF;
 }
+a{
+    text-decoration: none;
+}
 .cart {
     background: #F9F9F9;;
     width: 900px;
