@@ -96,15 +96,18 @@
         <c:forEach items="${pets}" var="p">
             <div class="column column-1-6" style="width: 250px; height: 425px">
                 <img src="${p.getImage()}" alt="${p.getImage()}" style="width: 200px; height: 200px">
-                <p>${p.getName()} (${p.getAge()} tuổi)</p>
-                <p>${p.getSpecial().getName()}</p>
-                <p>${p.getPriceString()}</p>
-                <p>${p.getStatus()}</p>
+                <p class="pet_info">${p.getName()} (${p.getAge()} tuổi)</p>
+                <p class="pet_info">${p.getSpecial().getName()}</p>
+                <p class="pet_info">${p.getPriceString()}</p>
+                <p class="pet_info">${p.getStatus()}</p>
+                <br>
                 <c:if test="${p.getStatus() eq 'Sold'}">
                     <button hidden>AddToCart</button>
                 </c:if>
                 <c:if test="${p.getStatus() eq 'Available'}">
-                    <a class="product-cart" style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}">AddToCart</a>
+                    <a class="product-cart" style="text-decoration: none" href="/OrderServlet?action=addToCart&id=${p.getId()}"> Add To Cart
+                        <i class="fas fa-cart-plus"></i>
+                    </a>
                 </c:if>
             </div>
         </c:forEach>
