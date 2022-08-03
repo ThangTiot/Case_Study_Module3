@@ -45,14 +45,14 @@
                     </a>
                     <a class="header_nav_link" href="#service">
                         <span>
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fas fa-clinic-medical"></i>
                         </span>
                         Services
                     </a>
                     <c:if test="${admin != null}">
                         <a class="header_nav_link" href="home.jsp">
                         <span>
-                            <i class="fa fa-bell" aria-hidden="true"></i>
+                           <i class='fas fa-shopping-bag'></i>
                         </span>
                             Shop
                         </a>
@@ -60,7 +60,7 @@
                     <c:if test="${customer != null}">
                         <a class="header_nav_link" href="homeCustomer.jsp">
                         <span>
-                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <i class='fas fa-shopping-bag'></i>
                         </span>
                             Shop
                         </a>
@@ -72,7 +72,7 @@
 <%--                        Shop--%>
 <%--                    </a>--%>
                     <a class="header_nav_link" href="#contact"><span>
-                <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                <i class='fas fa-address-book'></i>
             </span>
                         Contacts</a>
 
