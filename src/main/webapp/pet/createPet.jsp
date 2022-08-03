@@ -75,7 +75,7 @@
     <div class="form-group">
         <label class=" control-label"></label>
         <div class="bnt">
-            <button type="submit" class="btn"  style="width: 150px;height: 30px">Send
+            <button type="submit" class="btn"  style="width: 150px;height: 30px">Add
             </button>
         </div>
     </div>

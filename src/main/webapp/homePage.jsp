@@ -7,9 +7,10 @@
     <link rel="icon" href="assets/img/favicon.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
     <link rel="stylesheet" href="assets/style/style.css">
-<%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">--%>
+    <%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">--%>
     <link rel="stylesheet" href="assets/style/hero.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
           crossorigin="anonymous"/>
@@ -65,12 +66,6 @@
                             Shop
                         </a>
                     </c:if>
-<%--                    <a class="header_nav_link" href="home.jsp">--%>
-<%--                        <span>--%>
-<%--                            <i class="fa fa-bell" aria-hidden="true"></i>--%>
-<%--                        </span>--%>
-<%--                        Shop--%>
-<%--                    </a>--%>
                     <a class="header_nav_link" href="#contact"><span>
                 <i class='fas fa-address-book'></i>
             </span>
@@ -80,16 +75,16 @@
                 <div class="user-account">
                     <div class="user-info">
                         <c:if test="${admin != null}">
-                        <a id="user-name" class="user-name" style="padding-right: 10px;">
-                            <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
-                            ADMIN</a>
+                            <a id="user-name" class="user-name" style="padding-right: 10px;">
+                                <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
+                                ADMIN</a>
                         </c:if>
                         <c:if test="${customer != null}">
                             <a id="user-name" class="user-name" style="padding-right: 10px;">
                                 <i class="fa fa-user-circle" aria-hidden="true" style="font-size: 30px"></i>
-                                ${customer.getUsername().toUpperCase()}</a>
+                                    ${customer.getUsername().toUpperCase()}</a>
                         </c:if>
-                        <a href="/LoginServlet?action=logOut" class="user-name" >
+                        <a href="/LoginServlet?action=logOut" class="user-name">
                             <i class="fas fa-sign-out-alt" style="font-size: 25px; padding-right: 5px;"></i>
                             Log Out
                         </a>
@@ -155,8 +150,6 @@
             </div>
             <!-- End Single Item -->
 
-
-
         </div>
     </div>
 </section>
@@ -165,81 +158,29 @@
     <div class="product-button">
         <h2 style="font-size: 40px">Online Store</h2>
         <p>Discover our online pet shop and find interesting stuff for pet!</p>
-<%--        <c:if test="${admin != null}">--%>
-<%--            <a class="btn btn-success" href="home.jsp">--%>
-<%--              Visit our Shop--%>
-<%--            </a>--%>
-<%--        </c:if>--%>
-<%--        <c:if test="${customer != null}">--%>
-<%--            <a class="btn btn-success" href="homeCustomer.jsp">Visit our Shop--%>
-<%--            </a>--%>
-<%--        </c:if>--%>
-        <a href="#" class="btn btn-success">Visit our Shop</a>
+        <c:if test="${admin != null}">
+            <a class="btn btn-success" href="home.jsp">
+                Visit Our Shop
+            </a>
+        </c:if>
+        <c:if test="${customer != null}">
+            <a class="btn btn-success" href="homeCustomer.jsp">Visit Our Shop
+            </a>
+        </c:if>
     </div>
     <div class="listing-section">
-        <div class="product">
-            <div class="image-box" >
-                <!--                <div class="images" id="image-1"></div>-->
-                <img class="image-pet" src="image/husky1.jpg" alt="">
+        <c:forEach items="${pets}" var="p">
+            <div class="product">
+                <div class="image-box">
+                    <img class="image-pet" src="${p.getImage()}" alt="${p.getImage()}">
+                </div>
+                <div class="text-box">
+                    <h2 class="item">${p.getName()}</h2>
+                    <p class="description">${p.getSpecial().getName()}</p>
+                </div>
             </div>
-            <div class="text-box">
-                <h2 class="item">dog</h2>
-                <h3 class="price">$4.99</h3>
-                <p class="description">Lorem ipsum dolor sit.!</p>
-            </div>
-        </div>
-        <div class="product">
-            <div class="image-box">
-                <!--                <div class="images" id="image-4"></div>-->
-                <img class="image-pet"src="image/alaska1.jpg" alt="">
-
-            </div>
-            <div class="text-box">
-                <h2 class="item">Lorem.</h2>
-                <h3 class="price">$4.99</h3>
-                <p class="description">Lorem ipsum dolor sit.</p>
-            </div>
-        </div>
-        <div class="product">
-            <div class="image-box">
-                <!--                <div class="images" id="image-5"></div>-->
-                <img class="image-pet"src="image/alaska2.jpg" alt="">
-
-            </div>
-            <div class="text-box">
-                <h2 class="item">Husky</h2>
-                <h3 class="price">$4.99</h3>
-                <p class="description">Lorem ipsum dolor sit.!</p>
-            </div>
-        </div>
-        <div class="product">
-            <div class="image-box">
-                <!--                <div class="images" id="image-2">-->
-                <!--                    -->
-                <!--                </div>-->
-                <img class="image-pet" src="image/bulldog1.jpg" alt="">
-            </div>
-            <div class="text-box">
-                <h2 class="item">dog</h2>
-                <h3 class="price">$4.99</h3>
-                <p class="description">Lorem ipsum dolor sit.!</p>
-            </div>
-        </div>
-        <div class="product">
-            <div class="image-box">
-                <!--                <div class="images" id="image-3"></div>-->
-                <img  class="image-pet"src="image/bulldog2.jpg" alt="">
-
-            </div>
-            <div class="text-box">
-                <h2 class="item">cat</h2>
-                <h3 class="price">$4.99</h3>
-                <p class="description">Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
+        </c:forEach>
     </div>
-
-
 </section>
 <!--Members-->
 <section id="team" class="team-area">
@@ -321,7 +262,7 @@
                                     <a href="#"><i class="fas fa-envelope-open"></i></a>
                                 </span>
                         <h4>Anh LV</h4>
-                        <span>Cục Tạ №1</span>
+                        <span>Manager</span>
                     </div>
                 </div>
             </div>
@@ -357,7 +298,7 @@
                                     <a href="#"><i class="fas fa-envelope-open"></i></a>
                                 </span>
                         <h4>Phương Tạ</h4>
-                        <span>Cục Tạ №2</span>
+                        <span>Secretary</span>
                     </div>
                 </div>
             </div>
@@ -370,12 +311,7 @@
 <footer class="footer">
     <div class="container container--footer">
 
-            <h3 class="footer--header">Project done by Boom </h3>
-            <!--            <img-->
-            <!--                    src="assets/img/logo.png"-->
-            <!--                    alt="Monticello logo"-->
-            <!--                    class="logo__img"-->
-            <!--            />-->
+        <h3 class="footer--header">Project done by Boom </h3>
         <nav class="social social--footer">
             <ul class="social__list">
                 <li class="social__item">
@@ -400,12 +336,8 @@
 </footer>
 <script src="assets/libs/jquery/jquery-3.3.1.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAjHnCoxW-v8nLxS40ktg3RaCLuAXEGUg"></script>
-<!-- jQuery Plugins -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="assets/js/slicker.js"></script>
 <script src="assets/js/maps.js"></script>
-
-
-
 </body>
 </html>
